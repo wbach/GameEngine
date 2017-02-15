@@ -22,7 +22,7 @@ namespace wb
 }
 
 namespace Get
-{	
+{
 	static float Float(std::string line)
 	{
 		return std::stof(line);
@@ -89,10 +89,11 @@ namespace Utils
 	}
 
 	inline bool CheckFile(const std::string& name) {
-		struct stat buffer;
-		return (stat(name.c_str(), &buffer) == 0);
+		//struct stat buffer;
+		//return (stat(name.c_str(), &buffer) == 0);
+		return true;
 	}
-	
+
 	template <typename T> std::string ToStr(const T& t)
 	{
 		std::ostringstream os;
@@ -104,5 +105,5 @@ namespace Utils
 		int rval = 1;
 		while (rval<a) rval <<= 1;
 		return rval;
-	}	
+	}
 }

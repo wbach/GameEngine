@@ -3,6 +3,7 @@
 #include <list>
 #include <memory>
 #include "Transform.h"
+#include "../Components/Component.h"
 
 class CGameObject
 {
@@ -14,6 +15,8 @@ public:
 	const CTransform& GetWorldTransform();
 protected:
 	std::list<std::unique_ptr<CGameObject>> m_Childrens;
+	std::list<std::unique_ptr<CComponent>>  m_Components;
+
 	std::string m_Name;
 
 	CTransform m_LocalTransform;

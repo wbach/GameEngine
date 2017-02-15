@@ -2,6 +2,7 @@
 #include "../Display/DisplayManager.hpp"
 #include "../Input/InputManager.h"
 #include <fstream>
+#include "../Scene/Scene.hpp"
 
 class CEngine
 {
@@ -12,4 +13,5 @@ public:
 private:
 	CDisplayManager m_DisplayManager;
 	CInputManager	m_InputManager;
+	std::unique_ptr<CScene> m_Scene;
 };

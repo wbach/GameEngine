@@ -3,6 +3,7 @@
 #include <SDL2/SDL.h>
 #include "InputSDL.h"
 #include <GL/glew.h>
+#include <memory>
 
 class CSdlOpenGlApi : public CApi
 {
@@ -23,7 +24,7 @@ public:
 	virtual void SetCursorPosition(int x, int y) override;
 private:
 	SDL_GLContext m_GlContext;
-	SDL_Window* m_Window;	
-	SDL_Event m_Event;	
+	SDL_Window* m_Window;
+	SDL_Event m_Event;
 	Uint32 m_StartTime;
 };
