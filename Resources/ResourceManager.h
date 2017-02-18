@@ -9,5 +9,5 @@ public:
 
 private:
 	std::vector<std::unique_ptr<CModel>>    m_Models;
-	std::vector<std::unique_ptr<CTextInfo>>	m_Textures;
+	std::vector<std::unique_ptr<CTexture>>	m_Textures;
 };

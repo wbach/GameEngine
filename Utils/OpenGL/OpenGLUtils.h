@@ -71,6 +71,12 @@ namespace Utils
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		return vbo_id;
 	}
+	static void EnableVao(unsigned int vao, const std::vector<unsigned int>& attributes)
+	{
+		glBindVertexArray(vao);
+		for (const auto& i : attributes)
+			glEnableVertexAttribArray(i);
+	}
 
 	static void UnbindVao()
 	{

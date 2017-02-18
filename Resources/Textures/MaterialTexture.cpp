@@ -1,18 +1,19 @@
 #include "MaterialTexture.h"
 
 
-CMaterialTexture::CMaterialTexture(const std::string & file, const std::string & filepath, const SImage & image)
-	: m_Filename(file)
-	, m_Fullpath(filepath)
+CMaterialTexture::CMaterialTexture(bool keepData, const std::string & file, const std::string & filepath, const SImage & image)
+	: CTexture(file, filepath)
 	, m_Image(image)
+	, m_KeepData(keepData)
 {
 }
+
 
 void CMaterialTexture::OpenGLLoadingPass()
 {
 	if (m_Image.m_Data == nullptr || m_IsInit)
 	{
-		std::string error = "[Error] OGL There was an error loading the texture : " + filename + "\n";
+		std::string error = "[Error] OGL There was an error loading the texture : " + m_Filename + "\n";
 		throw std::runtime_error(error.c_str());
 	}
 
@@ -22,7 +23,7 @@ void CMaterialTexture::OpenGLLoadingPass()
 	if (hubo_error)
 	{
 		delete[] m_Image.m_Data;
-		std::string error = "[Error] OGL There was an error loading the texture : " + filename + "\n";
+		std::string error = "[Error] OGL There was an error loading the texture : " + m_Filename + "\n";
 		throw std::runtime_error(error.c_str());
 	}
 
