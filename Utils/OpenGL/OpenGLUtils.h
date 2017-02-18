@@ -77,7 +77,12 @@ namespace Utils
 		for (const auto& i : attributes)
 			glEnableVertexAttribArray(i);
 	}
-
+	static void DisableVao(unsigned int vao, const std::vector<unsigned int>& attributes)
+	{		
+		for (const auto& i : attributes)
+			glDisableVertexAttribArray(i);
+		glBindVertexArray(0);
+	}
 	static void UnbindVao()
 	{
 		glBindVertexArray(0);
