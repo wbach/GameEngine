@@ -14,15 +14,15 @@ const int MAX_BONES = 100;
 class CShaderProgram
 {
 public:
-	~CShaderProgram();
+	virtual ~CShaderProgram();
 
 	void InitShaderProgram(char* vertex_shader_file, char* fragment_shader_file);
 	void InitShaderProgram(char* vertex_shader_file, char* fragment_shader_file, char* geometry_shader_file);
 	void InitShaderProgram(char* vertex_shader_file, char* fragment_shader_file, char *tesselation_shader_file, char * tesselation_evaluation_shader_file);
 	void Start() const;
 	void Stop() const;
-	void BindAttribute(int attribute, const string& variableName) const;
-	int GetUniformLocation(const string& uniformName) const;
+	void BindAttribute(int attribute, const std::string& variableName) const;
+	int GetUniformLocation(const std::string& uniformName) const;
 
 protected:
 	virtual void GetAllUniformLocations() {}

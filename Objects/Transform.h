@@ -12,6 +12,7 @@ public:
 	CTransform(const glm::vec3& pos, const glm::vec3& rot, const glm::vec3& scale) : position(pos), rotation(rot), scale(scale), matrix(Utils::CreateTransformationMatrix(pos, rot, scale)) {}	
 	void UpdateMatrix() { matrix = Utils::CreateTransformationMatrix(position, rotation, scale); }
 	glm::vec2 GetPositionXZ() { return glm::vec2(position.x, position.z); }
+	const glm::mat4& GetMatrix() const { return matrix; }
 private:
 	glm::vec3 position;
 	glm::vec3 rotation;

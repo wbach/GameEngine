@@ -7,12 +7,12 @@ CGameObject::CGameObject()
 {
 }
 
-const CTransform & CGameObject::GetLocalTransform()
+const CTransform & CGameObject::GetLocalTransform() const
 {
 	return m_LocalTransform;
 }
 
-const CTransform & CGameObject::GetWorldTransform()
+const CTransform & CGameObject::GetWorldTransform() const
 {
 	return m_WorldTransform;
 }

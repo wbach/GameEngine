@@ -1,5 +1,10 @@
 #include "TextureLoader.h"
 
+CTextureLoader::CTextureLoader(std::vector<std::unique_ptr<CTexture>>& textures_vector, COpenGLLoader & openGLLoader)
+	: m_Textures(textures_vector)
+	, m_OpenGLLoader(openGLLoader)
+{
+}
 
 void CTextureLoader::ReadFile(const std::string & file, SImage& image, TextureFlip::Type flip_mode)
 {
@@ -53,13 +58,13 @@ void CTextureLoader::ReadFile(const std::string & file, SImage& image, TextureFl
 	FreeImage_Unload(imagen2);
 }
 
-unsigned int CTextureLoader::LoadTexture(const std::string & file, TextureType::Type type, TextureFlip::Type flip_mode)
+CTexture* CTextureLoader::LoadTexture(const std::string & file, bool opengl_pass, TextureType::Type type, TextureFlip::Type flip_mode)
 {
 	unsigned int id = 0;
 	for (auto& t : m_Textures)
 	{
 		if (t->GetFileName().compare(file) == 0)
-			return id;
+			return t.get();
 		id++;
 	}
 	SImage texture;
@@ -71,5 +76,14 @@ unsigned int CTextureLoader::LoadTexture(const std::string & file, TextureType::
 		m_Textures.push_back(std::make_unique<CMaterialTexture>(false, file, file, texture));
 		break;
 	}
-	return 0;
+	if(opengl_pass)
+		m_OpenGLLoader.AddObjectToOpenGLLoadingPass(m_Textures.back().get());
+	return m_Textures.back().get();
+}
+
+CTexture * CTextureLoader::LoadTextureImmediately(const std::string & file, TextureType::Type type, TextureFlip::Type flip_mode)
+{
+	auto texture = LoadTexture(file, false, type, flip_mode);
+	texture->OpenGLLoadingPass();
+	return texture;
 }

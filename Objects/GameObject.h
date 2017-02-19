@@ -9,10 +9,9 @@ class CGameObject
 {
 public:
 	CGameObject();
-	virtual void Render() = 0;
 	const auto& GetChildrens() { return m_Childrens; }
-	const CTransform& GetLocalTransform();
-	const CTransform& GetWorldTransform();
+	const CTransform& GetLocalTransform() const;
+	const CTransform& GetWorldTransform() const;
 protected:
 	std::list<std::unique_ptr<CGameObject>> m_Childrens;
 	std::list<std::unique_ptr<CComponent>>  m_Components;

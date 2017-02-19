@@ -1,8 +1,9 @@
 #pragma once
 #include "Mesh.h"
 #include <list>
+#include "../OpenGLObject.h"
 
-class CModel
+class CModel : public COpenGLObject
 {
 public:
 	CModel();
@@ -15,7 +16,7 @@ public:
 	virtual void AddCurrentFramePtr(unsigned int* ptr) { m_CurrentFrames.push_back(ptr); }
 	virtual void SetCurrentFrame(unsigned int& current_frame) {}
 	virtual void SetTime(const float& time) {}
-
+	void OpenGLLoadingPass();
 	CMesh* AddMesh(std::vector<float>& positions, std::vector<float>& text_coords, std::vector<float>& normals, std::vector<float>& tangents,
 		std::vector<unsigned short>& indices, SMaterial& material, std::vector<SVertexBoneData>& bones = std::vector<SVertexBoneData>());
 	const std::list<CMesh>& GetMeshes() const {return m_Meshes;	}

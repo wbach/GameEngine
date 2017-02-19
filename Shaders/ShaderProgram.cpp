@@ -130,11 +130,11 @@ void CShaderProgram::Stop() const
 {
 	glUseProgram(0);
 }
-int CShaderProgram::GetUniformLocation(const string& uniformName) const
+int CShaderProgram::GetUniformLocation(const std::string& uniformName) const
 {
 	return glGetUniformLocation(m_ProgramID, uniformName.c_str());
 }
-void CShaderProgram::BindAttribute(int attribute, const string& variableName) const
+void CShaderProgram::BindAttribute(int attribute, const std::string& variableName) const
 {
 	glBindAttribLocation(m_ProgramID, attribute, variableName.c_str());
 }

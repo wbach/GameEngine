@@ -49,7 +49,7 @@ public:
 	const unsigned int& GetVbo(VertexBufferObjects::Type type) const;
 	const unsigned int& GetVertexCount() const;
 	const SMaterial& GetMaterial() const;
-	const std::vector<unsigned int>& GetUsedAttributes() { return m_Attributes; }
+	const std::vector<unsigned int>& GetUsedAttributes() const { return m_Attributes; }
 
 	void ClearData();
 private:

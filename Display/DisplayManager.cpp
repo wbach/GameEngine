@@ -7,7 +7,7 @@ CDisplayManager::CDisplayManager(const std::string& window_name, const int& w, c
 
 CDisplayManager::CDisplayManager(std::unique_ptr<CApi> api, const std::string& window_name, const int& w, const int& h, bool full_screen)
 	: m_Api(std::move(api)) 
-	, m_FPS_CAP(30)
+	, m_FPS_CAP(60)
 	, m_LastFrameTime(0)
 	, m_WindowsSize({w, h})
 {
@@ -60,6 +60,7 @@ void CDisplayManager::CalculateFPS()
 	if (time_interval > 1)
 	{
 		m_Fps = m_FrameCount / (time_interval);
+		std::cout << "FPS : " << m_Fps << "\n";
 		m_PreviousTime = m_CurrentTime;
 		m_FrameCount = 0;
 	}

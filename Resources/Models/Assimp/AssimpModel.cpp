@@ -39,7 +39,7 @@ void CAssimModel::InitModel(std::string file_name)
 		aiMatrix4x4 m = m_Scene->mRootNode->mTransformation;
 		//m.Inverse();
 		m_GlobalInverseTransform = ToGlmMatrix(m);
-		RecursiveProcess("Data/Textures/", m_Scene->mRootNode, m_Scene);
+		RecursiveProcess("../Data/Textures/", m_Scene->mRootNode, m_Scene);
 		m_IsInit = true;
 		aiReleaseImport(m_Scene);
 	}
@@ -265,7 +265,7 @@ void CAssimModel::ProcessMesh(std::string file_path, aiMesh* mesh, const aiScene
 
 		try
 		{
-			int texture = m_TextureLodaer.LoadTexture(file_path + s.c_str(), TextureType::MATERIAL);
+			auto texture = m_TextureLodaer.LoadTexture(file_path + s.c_str(), true, TextureType::MATERIAL);
 			material.m_DiffuseTexture = texture;
 		}
 		catch (const std::runtime_error& e)
@@ -280,7 +280,7 @@ void CAssimModel::ProcessMesh(std::string file_path, aiMesh* mesh, const aiScene
 		mat->GetTexture(aiTextureType_HEIGHT, i, &str);
 		try
 		{
-			int texture = m_TextureLodaer.LoadTexture(file_path + str.C_Str(), TextureType::MATERIAL);
+			auto texture = m_TextureLodaer.LoadTexture(file_path + str.C_Str(), true, TextureType::MATERIAL);
 			material.m_NormalTexture = texture;
 		}
 		catch (const std::runtime_error& e)

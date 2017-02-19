@@ -2,6 +2,7 @@
 
 CEngine::CEngine(const std::string & window_name, const int & w, const int & h, bool full_screen)
 	: m_DisplayManager(window_name, w, h, full_screen)
+	, m_Projection({w, h})
 {
 	m_DisplayManager.SetInput(m_InputManager.m_Input);
 }
@@ -19,11 +20,89 @@ void CEngine::GameLoop()
 		m_ApiMessage = m_DisplayManager.PeekMessage();
 
 		if (m_InputManager.GetKey(KeyCodes::ESCAPE))
-			m_ApiMessage = ApiMessages::QUIT;
+			m_ApiMessage = ApiMessages::QUIT;		
 
+		if (m_Scene != nullptr)
+		{
+			switch (m_Scene->Update())
+			{
+			case 1: m_ApiMessage = ApiMessages::QUIT; break;
+			}
+
+			for (auto& renderer : m_Renderers)
+			{
+				renderer->PrepareFrame(m_Scene.get());
+				renderer->Render(m_Scene.get());
+				renderer->EndFrame(m_Scene.get());
+			}				
+		}
 		m_DisplayManager.Update();
 		m_InputManager.CheckReleasedKeys();
 	}
+}
+
+void CEngine::OpenGLLoadingPass(std::thread& loading_thread)
+{
+
+	int x = 0;
+	bool  load = true;
+	m_DisplayManager.GetSync() = true;
+	bool post_load = false;
+	while (load)
+	{
+		m_DisplayManager.PeekMessage();
+
+		load = GetIsLoading();
+
+		auto obj = m_Scene->GetResourceManager().GetOpenGlLoader().GetObjectToOpenGLLoadingPass();
+		if (obj != nullptr)
+		{
+			load = true;
+			obj->OpenGLLoadingPass();
+		}
+
+		m_LoadingScreenRenderer->Render(nullptr);
+		m_DisplayManager.Update();
+	}
+	loading_thread.join();
+	load = true;
+	while (load)
+	{
+		m_DisplayManager.PeekMessage();
+		auto obj = m_Scene->GetResourceManager().GetOpenGlLoader().GetObjectToOpenGLPostLoadingPass();
+		if (obj != nullptr)
+		{
+			load = true;
+			obj->OpenGLPostLoadingPass();
+		}
+		else
+		{
+			load = false;
+		}
+		m_LoadingScreenRenderer->Render(nullptr);
+		m_DisplayManager.Update();
+	}
+}
+
+void CEngine::LoadScene()
+{
+	if (m_Scene == nullptr) return;
+
+	m_Scene->Initialize();
+//	std::this_thread::sleep_for(std::chrono::seconds(10));
+	SetIsLoading(false);
+}
+
+void CEngine::SetIsLoading(bool is)
+{
+	std::lock_guard<std::mutex> lock(m_LoadingMutex);
+	m_IsLoading = is;
+}
+
+bool CEngine::GetIsLoading()
+{
+	std::lock_guard<std::mutex> lock(m_LoadingMutex);
+	return m_IsLoading;
 }
 
 int CEngine::ReadConfiguration(const std::string & file_name)
@@ -63,4 +142,23 @@ int CEngine::ReadConfiguration(const std::string & file_name)
 	}
 	file.close();
 	return 0;
+}
+
+void CEngine::Init()
+{
+	glEnable(GL_DEPTH_TEST);
+
+	m_Renderers.push_back(std::make_unique<CEntityRenderer>(m_Projection.GetProjectionMatrixPtr(), true));
+
+	for (auto& renderer : m_Renderers)
+		renderer->Init();
+	
+	auto circleTexture	= m_Scene->GetResourceManager().GetTextureLaoder().LoadTextureImmediately("../Data/GUI/circle2.png");
+	auto bgtexture		= m_Scene->GetResourceManager().GetTextureLaoder().LoadTextureImmediately("../Data/GUI/black-knight-dark-souls.png", TextureType::MATERIAL, TextureFlip::VERTICAL);
+	m_LoadingScreenRenderer = std::make_unique<CLoadingScreenRenderer>(bgtexture, circleTexture);
+	m_LoadingScreenRenderer->Init();
+
+	m_IsLoading = true;
+	std::thread loading_thread(&CEngine::LoadScene, this);
+	OpenGLLoadingPass(loading_thread);
 }

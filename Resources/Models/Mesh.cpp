@@ -21,6 +21,7 @@ CMesh::CMesh(
 	m_Tangents	 = std::move(tangents);
 	m_Bones		 = std::move(bones);
 	m_Material	 = material;	
+	m_VertexCount = m_Indices.size();
 
 	if (!m_Positions.empty())	m_Attributes.push_back(0);
 	if (!m_TextCoords.empty())	m_Attributes.push_back(1);
@@ -59,6 +60,7 @@ void CMesh::UpdateVertexPosition(const std::vector<float>& vertices) const
 void CMesh::CreateVaoMesh()
 {
 	m_Vao = Utils::CreateVao();
+	std::cout << "VAO :  " << m_Vao << std::endl;
 	GLuint vboId = Utils::BindIndicesBuffer(m_Indices); m_Vbos[VertexBufferObjects::INDICES] = vboId;
 	if (m_Positions.size() > 0)
 	{

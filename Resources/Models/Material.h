@@ -16,10 +16,10 @@ struct SMaterial
 	bool isTransparency  = false;
 	bool useFakeLighting = false;
 
-	int m_DiffuseTexture = -1;
-	int m_AmbientTexture = -1;
-	int m_SpecularTexture = -1;
-	int m_NormalTexture = -1;
+	CTexture* m_DiffuseTexture  = nullptr;
+	CTexture* m_AmbientTexture  = nullptr;
+	CTexture* m_SpecularTexture = nullptr;
+	CTexture* m_NormalTexture   = nullptr;
 
 	int numberOfRows = 1;
 	int textureIndex = 0;
