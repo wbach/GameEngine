@@ -8,7 +8,7 @@
 #include <algorithm>
 #include <list>
 #include "OpenGLLoader.h"
-#include "freeImage/FreeImage.h"
+#include <FreeImage.h>
 
 namespace TextureType
 {
@@ -29,5 +29,5 @@ public:
 private:
 	std::vector<std::unique_ptr<CTexture>>& m_Textures;
 	COpenGLLoader&   m_OpenGLLoader;
-	glm::vec2 m_MaxTextureResolution;	
+	glm::vec2 m_MaxTextureResolution;
 };

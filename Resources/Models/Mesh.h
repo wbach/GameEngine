@@ -25,7 +25,7 @@ class CMesh : public COpenGLObject
 public:
 	CMesh();
 	CMesh(std::vector<float>& positions, std::vector<float>& text_coords, std::vector<float>& normals, std::vector<float>& tangents,
-		std::vector<unsigned short>& indices, SMaterial& material, std::vector<SVertexBoneData>& bones = std::vector<SVertexBoneData>());
+		std::vector<unsigned short>& indices, SMaterial& material, std::vector<SVertexBoneData>& bones);
 	CMesh(const CMesh&) = delete;
 	CMesh(CMesh&&) = default;
 	virtual ~CMesh();
@@ -56,7 +56,7 @@ private:
     SMaterial	 m_Material;
 	unsigned int m_Vao;
 	unsigned int m_Vbos[VertexBufferObjects::COUNT];
-	unsigned int m_VertexCount;	
+	unsigned int m_VertexCount;
 	//used attributes
 	std::vector<unsigned int> m_Attributes;
 

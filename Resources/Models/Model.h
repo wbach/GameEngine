@@ -18,7 +18,7 @@ public:
 	virtual void SetTime(const float& time) {}
 	void OpenGLLoadingPass();
 	CMesh* AddMesh(std::vector<float>& positions, std::vector<float>& text_coords, std::vector<float>& normals, std::vector<float>& tangents,
-		std::vector<unsigned short>& indices, SMaterial& material, std::vector<SVertexBoneData>& bones = std::vector<SVertexBoneData>());
+		std::vector<unsigned short>& indices, SMaterial& material, std::vector<SVertexBoneData>& bones);
 	const std::list<CMesh>& GetMeshes() const {return m_Meshes;	}
 protected:
 	std::list<CMesh> m_Meshes;
