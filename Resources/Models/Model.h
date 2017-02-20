@@ -8,7 +8,7 @@ class CModel : public COpenGLObject
 public:
 	CModel();
 
-	virtual void InitModel(std::string file_name);
+	virtual void InitModel(const std::string&  file_name);
     CModel(const CModel& ) = delete;
 	virtual ~CModel() {}
 	virtual void Update(float dt) {};
@@ -20,9 +20,13 @@ public:
 	CMesh* AddMesh(std::vector<float>& positions, std::vector<float>& text_coords, std::vector<float>& normals, std::vector<float>& tangents,
 		std::vector<unsigned short>& indices, SMaterial& material, std::vector<SVertexBoneData>& bones);
 	const std::list<CMesh>& GetMeshes() const {return m_Meshes;	}
+
+	bool operator==(const CModel &q) { return m_Filename.compare(q.m_Filename) == 0; }
+	bool operator==(const std::string &file) { return m_Filename.compare(file) == 0; }
+	const std::string& GetFileName() {return m_Filename;}
 protected:
 	std::list<CMesh> m_Meshes;
-
+	std::string m_Filename;
 	//For all model
 	BoundingBox m_BoundingBox;
 

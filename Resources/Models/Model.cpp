@@ -6,8 +6,9 @@ CModel::CModel()
 
 }
 
-void CModel::InitModel(std::string file_name)
+void CModel::InitModel(const std::string&  file_name)
 {
+	m_Filename = file_name;
 }
 
 void CModel::OpenGLLoadingPass()

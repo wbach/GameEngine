@@ -60,7 +60,7 @@ void CMesh::UpdateVertexPosition(const std::vector<float>& vertices) const
 void CMesh::CreateVaoMesh()
 {
 	m_Vao = Utils::CreateVao();
-	std::cout << "VAO :  " << m_Vao << std::endl;
+
 	GLuint vboId = Utils::BindIndicesBuffer(m_Indices); m_Vbos[VertexBufferObjects::INDICES] = vboId;
 	if (m_Positions.size() > 0)
 	{

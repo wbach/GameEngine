@@ -12,8 +12,9 @@ class CAssimModel : public CModel
 public:
 	CAssimModel(CTextureLoader& texture_lodaer);
 	virtual ~CAssimModel() override;
-	virtual void	InitModel(std::string file_name) override;
+	virtual void	InitModel(const std::string& file_name) override;
 	static void		ReadCollisions(std::string file_name, std::vector<float>& postions, std::vector<float>& normals, std::vector<unsigned int>& indices);
+
 private:
 	static void RecursiveProcess(const aiScene *scene, aiNode *node, std::vector<float>& postions, std::vector<float>& normals, std::vector<unsigned int>& indices);
 	void ProcessMesh(std::string file_path, aiMesh* mesh, const aiScene* scene);

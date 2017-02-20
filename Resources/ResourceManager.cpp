@@ -7,6 +7,12 @@ CResourceManager::CResourceManager()
 
 CModel * CResourceManager::LoadModel(const std::string & file)
 {
+	for (const auto& model : m_Models)
+	{
+		if (model->GetFileName().compare(file) == 0)
+			return model.get();
+	}
+
 	m_Models.push_back(std::make_unique<CAssimModel>(m_TextureLoader));
 	m_Models.back()->InitModel(file);
 	return m_Models.back().get();

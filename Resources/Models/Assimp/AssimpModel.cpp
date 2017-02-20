@@ -10,14 +10,15 @@ CAssimModel::CAssimModel(CTextureLoader & texture_lodaer)
 {
 }
 
-void CAssimModel::InitModel(std::string file_name)
+void CAssimModel::InitModel(const std::string& file_name)
 {
-	std::replace(file_name.begin(), file_name.end(), '\\', '/');
-	std::string path = file_name.substr(0, file_name.find_last_of('/'));
+	m_Filename = file_name;
+	std::replace(m_Filename.begin(), m_Filename.end(), '\\', '/');
+	std::string path = m_Filename.substr(0, m_Filename.find_last_of('/'));
 
 	if (!Utils::CheckFile(file_name))
 	{
-		std::string error = "[Error] The file " + file_name + " wasnt successfuly opened";
+		std::string error = "[Error] The file " + m_Filename + " wasnt successfuly opened";
 		throw std::runtime_error(error.c_str());
 	}
 
@@ -28,12 +29,12 @@ void CAssimModel::InitModel(std::string file_name)
 	//if(normals == "flat" ) flags |= aiProcess_GenNormals ;
 	//if(normals == "smooth" ) flags |= aiProcess_GenSmoothNormals ;
 	//std::cout << " The file " << file_name << "*********************************************************** " << std::endl;
-	m_Scene = aiImportFile(file_name.c_str(), flags);
+	m_Scene = aiImportFile(m_Filename.c_str(), flags);
 	if (m_Scene)
 	{
 		if (m_Scene->mFlags == AI_SCENE_FLAGS_INCOMPLETE || !m_Scene->mRootNode)
 		{
-			std::string error = "[Error] The file " + file_name + " wasnt successfuly opened - AI_SCENE_FLAGS_INCOMPLETE";
+			std::string error = "[Error] The file " + m_Filename + " wasnt successfuly opened - AI_SCENE_FLAGS_INCOMPLETE";
 			throw std::runtime_error(error.c_str());
 		}
 		aiMatrix4x4 m = m_Scene->mRootNode->mTransformation;
@@ -354,10 +355,10 @@ void CAssimModel::BoneTransform(unsigned int num_bones, std::vector<SBoneInfo>& 
 {
 	glm::mat4 Identity(1.0f);
 
-	float TicksPerSecond = m_Scene->mAnimations[0]->mTicksPerSecond != 0 ?
-		m_Scene->mAnimations[0]->mTicksPerSecond : 25.0f;
+	float TicksPerSecond = (float)m_Scene->mAnimations[0]->mTicksPerSecond != 0 ?
+		(float)m_Scene->mAnimations[0]->mTicksPerSecond : 25.0f;
 	float TimeInTicks = TimeInSeconds * TicksPerSecond;
-	float AnimationTime = fmod(TimeInTicks, m_Scene->mAnimations[0]->mDuration);
+	float AnimationTime = (float)fmod(TimeInTicks, m_Scene->mAnimations[0]->mDuration);
 
 	ReadNodeHeirarchy(bone_mapping, bone_info, AnimationTime, m_Scene->mRootNode, Identity);
 
