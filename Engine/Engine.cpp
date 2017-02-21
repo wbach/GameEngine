@@ -153,11 +153,13 @@ void CEngine::Init()
 	for (auto& renderer : m_Renderers)
 		renderer->Init();
 	
-	auto circleTexture	= m_Scene->GetResourceManager().GetTextureLaoder().LoadTextureImmediately("../Data/GUI/circle2.png");
-	auto bgtexture		= m_Scene->GetResourceManager().GetTextureLaoder().LoadTextureImmediately("../Data/GUI/black-knight-dark-souls.png", TextureType::MATERIAL, TextureFlip::VERTICAL);
+	auto circleTexture	= m_ResorceManager.GetTextureLaoder().LoadTextureImmediately("../Data/GUI/circle2.png");
+	auto bgtexture		= m_ResorceManager.GetTextureLaoder().LoadTextureImmediately("../Data/GUI/black-knight-dark-souls.png", TextureType::MATERIAL, TextureFlip::VERTICAL);
 	m_LoadingScreenRenderer = std::make_unique<CLoadingScreenRenderer>(bgtexture, circleTexture);
 	m_LoadingScreenRenderer->Init();
-
+}
+void CEngine::PreperaScene()
+{
 	m_IsLoading = true;
 	std::thread loading_thread(&CEngine::LoadScene, this);
 	OpenGLLoadingPass(loading_thread);

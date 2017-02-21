@@ -6,7 +6,7 @@
 #include "../Renderers/Entity/EntityRenderer.h"
 #include "../Renderers/LodingScreenRenderer.h"
 #include "Projection.h"
-
+#include "../Resources/ResourceManager.h"
 class CEngine
 {
 public:
@@ -15,6 +15,7 @@ public:
 	void Init();
 	void GameLoop();
 	void OpenGLLoadingPass(std::thread& loading_thread);
+	void PreperaScene();
 	void LoadScene();
 	void SetIsLoading(bool is);
 	bool GetIsLoading();
@@ -27,7 +28,8 @@ private:
 	std::vector<std::unique_ptr<CRenderer>> m_Renderers;
 
 	SProjection m_Projection;
-
+	//Global items, loading screen etc...
+	CResourceManager m_ResorceManager;
 
 	bool m_IsLoading;
 	std::mutex m_LoadingMutex;

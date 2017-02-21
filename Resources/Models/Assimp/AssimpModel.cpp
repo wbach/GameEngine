@@ -82,8 +82,11 @@ void CAssimModel::ReadCollisions(std::string file_name, std::vector<float>& post
 
 CAssimModel::~CAssimModel()
 {
+	std::cout << "Assimp destructor \n";
+
 	if (!m_IsInit)
 		return;
+
 	if (m_Scene != nullptr)
 	{
 		///aiReleaseImport(m_Scene);

@@ -10,7 +10,7 @@ public:
 
 	virtual void InitModel(const std::string&  file_name);
     CModel(const CModel& ) = delete;
-	virtual ~CModel() {}
+	virtual ~CModel();
 	virtual void Update(float dt) {};
 	virtual const std::vector<glm::mat4>& GetBonesTransforms(unsigned int mesh_id) { return  std::vector<glm::mat4>(); }
 	virtual void AddCurrentFramePtr(unsigned int* ptr) { m_CurrentFrames.push_back(ptr); }

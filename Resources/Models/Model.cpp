@@ -11,6 +11,11 @@ void CModel::InitModel(const std::string&  file_name)
 	m_Filename = file_name;
 }
 
+CModel::~CModel() 
+{
+	std::cout << "Base model destructor \n";
+}
+
 void CModel::OpenGLLoadingPass()
 {
 	for (auto& mesh : m_Meshes)
