@@ -29,7 +29,7 @@ void CAssimModel::InitModel(const std::string& file_name)
 	//if(normals == "flat" ) flags |= aiProcess_GenNormals ;
 	//if(normals == "smooth" ) flags |= aiProcess_GenSmoothNormals ;
 	//std::cout << " The file " << file_name << "*********************************************************** " << std::endl;
-	m_Scene = aiImportFile(m_Filename.c_str(), flags);
+	m_Scene = importer.ReadFile(m_Filename.c_str(), flags);// aiImportFile(m_Filename.c_str(), flags);
 	if (m_Scene)
 	{
 		if (m_Scene->mFlags == AI_SCENE_FLAGS_INCOMPLETE || !m_Scene->mRootNode)
@@ -38,15 +38,14 @@ void CAssimModel::InitModel(const std::string& file_name)
 			throw std::runtime_error(error.c_str());
 		}
 		aiMatrix4x4 m = m_Scene->mRootNode->mTransformation;
-		//m.Inverse();
 		m_GlobalInverseTransform = ToGlmMatrix(m);
 		RecursiveProcess("../Data/Textures/", m_Scene->mRootNode, m_Scene);
 		m_IsInit = true;
-		aiReleaseImport(m_Scene);
+		//aiReleaseImport(m_Scene);
 	}
 	else
 	{
-		std::string error = "Error parsing " + file_name + importer.GetErrorString();
+		std::string error = "Error parsing " + file_name +importer.GetErrorString();
 		throw std::runtime_error(error.c_str());
 	}
 }
@@ -133,9 +132,6 @@ void CAssimModel::ProcessMesh(std::string file_path, aiMesh* mesh, const aiScene
 	std::vector<float> text_coords;
 	std::vector<float> normals;
 	std::vector<float> tangents;
-	std::vector<float> diffuse;
-	std::vector<float> specular;
-	std::vector<float> ambient;
 	std::vector<unsigned short> indices;
 
 	m_BonesInfo.push_back(SBonesInfo());

@@ -59,45 +59,10 @@ void CShaderProgram::InitShaderProgram(char * vertex_shader_file, char * fragmen
 	glValidateProgram(m_ProgramID);
 	m_IsInitialized = true;
 }
-void CShaderProgram::LoadFile(const char* fn, std::string& str)
-{
-    std::ifstream in(fn);
-        if(!in.is_open())
-        {
-            std::cout << "The file " << fn << " cannot be opened\n";
-            return;
-        }
-        char tmp[300];
-        while(!in.eof())
-        {
-            in.getline(tmp,300);
-            str+=tmp;
-            str+='\n';
-        }
-        in.close();
-	/*std::ifstream in;
-	in.exceptions(ifstream::failbit | std::ifstream::badbit);
-	try {
-		in.open(fn);
-		char tmp[300];
-		while (!in.eof())
-		{
-			in.getline(tmp, 300);
-			str += tmp;
-			str += '\n';
-			cout << tmp <<endl ;
-		}
-		in.close();
-	}
-	catch (std::ifstream::failure e) {
-		std::cerr << "The file " << fn << " exceptions in reading: \n" << e.what() << endl;
-	}*/
-}
 
 unsigned int CShaderProgram::LoadShader(char *filename, unsigned int mode)
 {
-	std::string source;
-	LoadFile(filename, source);
+	std::string source = Utils::ReadFile(filename);
 
 	unsigned int id;
 	id = glCreateShader(mode);

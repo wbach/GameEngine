@@ -1,6 +1,7 @@
 #pragma once
 #include "Models/Model.h"
 #include "Models/Assimp/AssimpModel.h"
+#include "Models/MyOBJ/MyModel.h"
 #include "TextureLoader.h"
 #include "OpenGLLoader.h"
 #include "SimpleModels/Quad.h"

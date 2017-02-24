@@ -4,6 +4,7 @@
 #include "GLM/GLMUtils.h"
 #include "OpenGL/OpenGLUtils.h"
 #include "XML/XMLUtils.h"
+#include <fstream>
 
 #ifndef M_PI
 #define M_PI    3.14159265358979323846264338327950288   /* pi */
@@ -31,17 +32,17 @@ namespace Get
 	{
 		return stoi(line);
 	}
-	static glm::vec2 Vector2d(std::string line)
+	static glm::vec2 Vector2d(std::string line, char prefix = 'x')
 	{
-		float x = std::stof(line.substr(0, line.find_last_of("x")));
-		float y = std::stof(line.substr(line.find_last_of("x") + 1));
+		float x = std::stof(line.substr(0, line.find_last_of(prefix)));
+		float y = std::stof(line.substr(line.find_last_of(prefix) + 1));
 		return glm::vec2(x, y);
 	}
-	static glm::vec3 Vector3d(std::string line)
+	static glm::vec3 Vector3d(std::string line, char prefix = 'x')
 	{
-		float z = std::stof(line.substr(line.find_last_of("x") + 1));
-		float x = std::stof(line.substr(0, line.find_first_of("x")));
-		float y = std::stof(line.substr(line.find_first_of("x")+1, line.find_last_of("x")));
+		float z = std::stof(line.substr(line.find_last_of(prefix) + 1));
+		float x = std::stof(line.substr(0, line.find_first_of(prefix)));
+		float y = std::stof(line.substr(line.find_first_of(prefix)+1, line.find_last_of(prefix)));
 		return glm::vec3(x, y, z);
 	}
 	static bool Boolean(std::string line)
@@ -74,7 +75,40 @@ namespace Utils
 	{
 		return a * 0.277777778f;
 	}
+	static std::vector<std::string> SplitString(const std::string& s, char split_char)
+	{
+		std::vector<std::string> tokens;
+		std::string token;
 
+		for (const auto& c : s)
+		{
+			if (c == split_char)
+			{
+				tokens.push_back(token);
+				token.clear();
+				continue;
+			}
+			token += c;
+		}
+		if (!token.empty())
+			tokens.push_back(token);
+
+		return tokens;
+	}
+
+	static std::string ReadFile(const std::string& file_name)
+	{
+		std::ifstream t(file_name);
+		return std::string((std::istreambuf_iterator<char>(t)),
+			std::istreambuf_iterator<char>());
+	}
+	static void GetFileAndPath(const std::string& full, std::string& filename, std::string& path)
+	{
+		auto file = full;
+		std::replace(file.begin(), file.end(), '\\', '/');
+		path = file.substr(0, file.find_last_of('/'));
+		filename = file.substr(file.find_last_of('/') + 1);
+	}
 	static std::string ConvertToRelativePath(std::string path)
 	{
 		if (path.empty()) return path;

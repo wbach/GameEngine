@@ -20,11 +20,7 @@ void CEntityShader::GetAllUniformLocations()
 	location_UseBoneTransform = GetUniformLocation("UseBoneTransform");
 
 	for (int x = 0; x < MAX_BONES; x++)
-	{
-		char tmpVariableName[50]; ; memset(tmpVariableName, 0, 50);
-		sprintf(tmpVariableName, "Bones[%i]", x);
-		location_Bones[x] = GetUniformLocation(tmpVariableName);
-	}
+		location_Bones[x] = GetUniformLocation("Bones[" + std::to_string(x) + "]");
 }
 
 void CEntityShader::BindAttributes()

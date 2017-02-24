@@ -1,5 +1,6 @@
 #pragma once
-#define _CRT_SECURE_NO_WARNINGS
+//#define _CRT_SECURE_NO_WARNINGS
+#include "../Utils/Utils.h"
 #include <string>
 #include <fstream>
 #include <iostream>
@@ -35,7 +36,6 @@ protected:
 	void LoadValue(unsigned int loacation, const glm::mat3& value) const;
 	void LoadValue(unsigned int loacation, const glm::mat4& value) const;
 private:
-	void LoadFile(const char* fn, std::string& str);
 	unsigned int LoadShader(char *filename, unsigned int mode);
 
 	int m_ProgramID;
