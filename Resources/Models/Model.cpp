@@ -30,3 +30,4 @@ CMesh * CModel::AddMesh(std::vector<float>& positions, std::vector<float>& text_
 	m_Meshes.push_back(std::move(mesh));
 	return &m_Meshes.back();
 }
+

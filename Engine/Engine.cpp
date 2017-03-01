@@ -87,8 +87,10 @@ void CEngine::OpenGLLoadingPass(std::thread& loading_thread)
 void CEngine::LoadScene()
 {
 	if (m_Scene == nullptr) return;
-
+	auto start = std::chrono::high_resolution_clock::now();
 	m_Scene->Initialize();
+	auto end = std::chrono::high_resolution_clock::now();
+	std::cout << "Loading time: " << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() / 1000.f << "s.\n";
 //	std::this_thread::sleep_for(std::chrono::seconds(10));
 	SetIsLoading(false);
 }

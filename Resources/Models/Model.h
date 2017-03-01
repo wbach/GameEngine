@@ -11,7 +11,7 @@ public:
 	virtual void InitModel(const std::string&  file_name);
     CModel(const CModel& ) = delete;
 	virtual ~CModel();
-	virtual void Update(float dt) {};
+	virtual void Update(float dt) {};	
 	virtual const std::vector<glm::mat4>& GetBonesTransforms(unsigned int mesh_id) { return  std::vector<glm::mat4>(); }
 	virtual void AddCurrentFramePtr(unsigned int* ptr) { m_CurrentFrames.push_back(ptr); }
 	virtual void SetCurrentFrame(unsigned int& current_frame) {}
@@ -24,6 +24,7 @@ public:
 	bool operator==(const CModel &q) { return m_Filename.compare(q.m_Filename) == 0; }
 	bool operator==(const std::string &file) { return m_Filename.compare(file) == 0; }
 	const std::string& GetFileName() {return m_Filename;}
+
 protected:
 	std::list<CMesh> m_Meshes;
 	std::string m_Filename;

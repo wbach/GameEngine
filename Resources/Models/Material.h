@@ -6,6 +6,8 @@
 
 struct SMaterial
 {
+	std::string name;
+
 	glm::vec3 ambient  = glm::vec3(0);
 	glm::vec3 diffuse  = glm::vec3(0.8);
 	glm::vec3 specular = glm::vec3(0);

@@ -20,6 +20,21 @@ namespace wb
 		int x;
 		int y;
 	};
+	struct vec3i
+	{
+		int x;
+		int y;
+		int z;
+
+		bool operator==(const vec3i& v) const
+		{
+			return x == v.x && y == v.y && z == v.z;
+		}
+		//To my model map find
+		bool operator<(const vec3i& v) const {
+			return x != v.x || y != v.y || z != v.z;
+		};
+	};
 }
 
 namespace Get
