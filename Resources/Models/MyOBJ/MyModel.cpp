@@ -299,7 +299,7 @@ void CMyModel::ProcesMaterial(WBLoader::Object * object, WBLoader::Mesh *& mesh,
 	auto f = [&](const SMaterial& v) {
 		return value == v.name;
 	};
-	auto& material = std::find_if(std::begin(materials), std::end(materials), f);
+	auto material = std::find_if(std::begin(materials), std::end(materials), f);
 	mesh->material = *material;
 }
 
