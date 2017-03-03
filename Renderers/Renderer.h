@@ -11,8 +11,7 @@ public:
     //Debug
     const unsigned int& GetObjectsPerFrame();
 	const unsigned int& GetVertexPerFrame();
-private:
-
+protected:
     //Debug variables
     unsigned int m_RendererObjectPerFrame = 0;
 	unsigned int m_RendererVertixesPerFrame = 0;

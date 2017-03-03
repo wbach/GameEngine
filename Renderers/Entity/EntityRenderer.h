@@ -1,6 +1,6 @@
 #pragma once
 #include "../Renderer.h"
-#include "../../Shaders/Simple/Entity/SimpleEnityShader.h"
+#include "Shaders/SimpleEnityShader.h"
 #include "../../Utils/OpenGL/OpenGLUtils.h"
 
 class CEntityRenderer : public CRenderer
@@ -21,5 +21,3 @@ private:
 	std::list<std::unique_ptr<CGameObject>> m_Objects;
 	bool m_UseSimpleShader;
 };
-
-	

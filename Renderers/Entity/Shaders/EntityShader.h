@@ -1,5 +1,5 @@
 #pragma once
-#include "../../ShaderProgram.h"
+#include "../../../Shaders/ShaderProgram.h"
 #include "glm/gtc/matrix_transform.hpp"
 
 class CEntityShader : public CShaderProgram
