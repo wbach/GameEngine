@@ -150,7 +150,7 @@ void CEngine::Init()
 {
 	glEnable(GL_DEPTH_TEST);
 
-	m_Renderers.push_back(std::make_unique<CEntityRenderer>(m_Projection.GetProjectionMatrixPtr(), true));
+    m_Renderers.push_back(std::make_unique<SimpleRenderer>(m_Projection.GetProjectionMatrixPtr()));
 
 	for (auto& renderer : m_Renderers)
 		renderer->Init();

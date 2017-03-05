@@ -9,7 +9,7 @@ class CGameObject
 {
 public:
 	CGameObject();
-	const auto& GetChildrens() { return m_Childrens; }
+        const std::list<std::unique_ptr<CGameObject>>& GetChildrens() { return m_Childrens; }
 	const CTransform& GetLocalTransform() const;
 	const CTransform& GetWorldTransform() const;
 protected:

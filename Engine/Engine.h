@@ -7,6 +7,8 @@
 #include "../Renderers/LodingScreenRenderer.h"
 #include "Projection.h"
 #include "../Resources/ResourceManager.h"
+#include "../Renderers/SimpleRenderer.h"
+
 class CEngine
 {
 public:

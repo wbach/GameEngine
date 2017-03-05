@@ -1,11 +1,11 @@
-#include "EntityRenderer.h"
+#include "SimpleRenderer.h"
 
-CEntityRenderer::CEntityRenderer(glm::mat4 * projection_matrix)
+SimpleRenderer::SimpleRenderer(glm::mat4 * projection_matrix)
 	: m_ProjectionMatrix(projection_matrix)
 {
 }
 
-void CEntityRenderer::Init()
+void SimpleRenderer::Init()
 {
 	m_Shader.Init();
 	m_Shader.Start();
@@ -14,13 +14,13 @@ void CEntityRenderer::Init()
 	m_Shader.Stop();
 }
 
-void CEntityRenderer::PrepareFrame(CScene * scene)
+void SimpleRenderer::PrepareFrame(CScene * scene)
 {
 	m_Shader.Start();
 	m_Shader.LoadViewMatrix(scene->GetCamera()->GetViewMatrix());
 }
 
-void CEntityRenderer::Render(CScene * scene)
+void SimpleRenderer::Render(CScene * scene)
 {
 	for (auto& entity : scene->GetEntities())
 	{
@@ -31,12 +31,12 @@ void CEntityRenderer::Render(CScene * scene)
 	}
 }
 
-void CEntityRenderer::EndFrame(CScene * scene)
+void SimpleRenderer::EndFrame(CScene * scene)
 {
 	m_Shader.Stop();
 }
 
-void CEntityRenderer::RenderModel(CModel * model, const glm::mat4 & transform_matrix) const
+void SimpleRenderer::RenderModel(CModel * model, const glm::mat4 & transform_matrix) const
 {
 	m_Shader.LoadTransformMatrix(transform_matrix);
 
@@ -49,7 +49,7 @@ void CEntityRenderer::RenderModel(CModel * model, const glm::mat4 & transform_ma
 	}
 }
 
-void CEntityRenderer::BindTextures(const SMaterial & material) const
+void SimpleRenderer::BindTextures(const SMaterial & material) const
 {
 	if (material.m_DiffuseTexture != nullptr)
 	{
