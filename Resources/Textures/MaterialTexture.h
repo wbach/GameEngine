@@ -1,6 +1,7 @@
 #pragma once
 #include "Texture.h"
 #include "Image.h"
+#include <stdexcept>
 
 class CMaterialTexture : public CTexture
 {

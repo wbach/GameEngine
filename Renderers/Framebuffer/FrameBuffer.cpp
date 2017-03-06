@@ -81,7 +81,6 @@ CFrameBuffer::~CFrameBuffer()
 {
 	if (!m_IsInitialized) return;
 
-	std::cout << "Destructor " << typeid(*this).name() << std::endl;
 	for (GLuint& tex : m_Textures)
 		glDeleteTextures(1, &tex);
 
