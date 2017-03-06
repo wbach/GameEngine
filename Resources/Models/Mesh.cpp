@@ -27,6 +27,8 @@ CMesh::CMesh(
 	if (!m_TextCoords.empty())	m_Attributes.push_back(1);
 	if (!m_Normals.empty())		m_Attributes.push_back(2);
 	if (!m_Tangents.empty())	m_Attributes.push_back(3);
+
+	CalculateBoudnigBox(m_Positions);
 }
 
 CMesh::~CMesh()

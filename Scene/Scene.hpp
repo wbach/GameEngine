@@ -24,7 +24,7 @@ public:
 
 	//Add Entities
 	void AddObject(std::unique_ptr<CGameObject> object);
-	void AddEntity(const std::string& filename);
+	CEntity* AddEntity(const std::string& filename, const glm::vec3 normalized_scale, const glm::vec3& position = glm::vec3(0.f));
 
 	//GetObjects
     std::list<CGameObject*> GetObjectInRange(const glm::vec3& position, float range);

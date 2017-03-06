@@ -27,7 +27,7 @@ void SimpleRenderer::Render(CScene * scene)
 		if (entity->GetModel() == nullptr)
 			continue;
 
-		RenderModel(entity->GetModel(), entity->GetWorldTransform().GetMatrix());
+		RenderModel(entity->GetModel(), entity->m_WorldTransform.GetMatrix());
 	}
 }
 
