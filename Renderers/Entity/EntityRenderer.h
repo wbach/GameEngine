@@ -6,7 +6,7 @@
 class CEntityRenderer : public CRenderer
 {
 public:
-    CEntityRenderer(glm::mat4* projection_matrix);
+    CEntityRenderer(SProjection* projection_matrix);
 	// Loading lights itp to shader
 	virtual void Init() override;
 	virtual void PrepareFrame(CScene* scene) override;
@@ -14,7 +14,10 @@ public:
 	virtual void EndFrame(CScene* scene) override;
 	void RenderModel(CModel* model, const glm::mat4& transform_matrix) const;
 private:
-	void BindTextures(const SMaterial& material) const;
+	void BindMaterial(const SMaterial& material) const;
+	void UnBindMaterial(const SMaterial& material) const;
 	CEntityGeometryPassShader m_Shader;
-	glm::mat4* m_ProjectionMatrix;
+	SProjection* m_ProjectionMatrix;
+
+	glm::vec4	m_ClipPlane;
 };

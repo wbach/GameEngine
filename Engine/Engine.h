@@ -3,7 +3,7 @@
 #include "../Input/InputManager.h"
 #include <fstream>
 #include "../Scene/Scene.hpp"
-#include "../Renderers/Entity/EntityRenderer.h"
+#include "../Renderers/FullRenderer.h"
 #include "../Renderers/LodingScreenRenderer.h"
 #include "Projection.h"
 #include "../Resources/ResourceManager.h"

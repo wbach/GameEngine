@@ -10,6 +10,12 @@ struct SSimpleQuad
 		Utils::CreateQuad(vao, i_vbo, vbo_id, vbo_text_id, m_IndicesSize);
 		isInit = true;
 	}
+
+	void Render()
+	{
+		Utils::SimpleRenderVao(vao, m_IndicesSize);
+	}
+
 	~SSimpleQuad()
 	{
 		if (isInit)

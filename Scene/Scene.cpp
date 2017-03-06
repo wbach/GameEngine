@@ -1,5 +1,10 @@
 #include "Scene.hpp"
 
+CScene::CScene()
+	: m_DirectionalLight(glm::vec3(10000, 15000, 10000), glm::vec3(0.8))
+{
+}
+
 void CScene::AddObject(std::unique_ptr<CGameObject> object)
 {
 	//m_Objects.push_back(object);
@@ -23,6 +28,11 @@ std::list<CGameObject*> CScene::GetObjectInRange(const glm::vec3 & position, flo
 CCamera * CScene::GetCamera()
 {
 	return m_Camera.get();
+}
+
+const CLight & CScene::GetDirectionalLight() const
+{
+	return m_DirectionalLight;
 }
 
 const std::vector<CLight>& CScene::GetLights() const

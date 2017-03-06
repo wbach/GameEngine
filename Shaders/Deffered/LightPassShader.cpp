@@ -45,20 +45,6 @@ void CLightPassShader::BindAttributes()
 {
 	BindAttribute(0, "Position");
 }
-void CLightPassShader::LoadTransformMatrix(const glm::mat4& matrix) const
-{
-	LoadValue(location_TransformationMatrix, matrix);
-}
-
-void CLightPassShader::LoadProjectionMatrix(const glm::mat4& matrix) const
-{
-	LoadValue(location_ProjectionMatrix, matrix);
-}
-
-void CLightPassShader::LoadViewMatrix(const glm::mat4& matrix) const
-{
-	LoadValue(location_ViewMatrix, matrix);
-}
 void CLightPassShader::LoadLightNumber(const int& i) const
 {
 	LoadValue(location_NumberOfLights, i);
@@ -77,9 +63,9 @@ void CLightPassShader::LoadCameraPosition(const glm::vec3& camera_position) cons
 	LoadValue(location_CameraPosition, camera_position);
 }
 
-void CLightPassShader::LoadScreenSize(glm::vec2 screen_size)
+void CLightPassShader::LoadScreenSize(const wb::vec2i& screen_size)
 {
-	LoadValue(location_ScreenSize, screen_size);
+	LoadValue(location_ScreenSize, glm::vec2((float)screen_size.x , (float) screen_size.y));
 }
 
 void CLightPassShader::ConnectTextureUnits() const

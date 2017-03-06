@@ -115,7 +115,8 @@ namespace Utils
 	static void CreateQuad(GLuint & vao, GLuint & vbo_indices, GLuint & vbo_vertex, GLuint & vbo_text_coord, int & indices_size)
 	{
 		//std::vector<float> vertex = { -0.5, 0.5, 0, -0.5, -0.5, 0, 0.5, -0.5, 0, 0.5, 0.5, 0 };
-		std::vector<float> vertex = { -1,  1, 0,
+		std::vector<float> vertex = { 
+			-1,  1, 0,
 			-1, -1, 0,
 			1, -1, 0,
 			1,  1, 0 };

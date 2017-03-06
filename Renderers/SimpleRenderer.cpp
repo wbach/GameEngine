@@ -1,6 +1,6 @@
 #include "SimpleRenderer.h"
 
-SimpleRenderer::SimpleRenderer(glm::mat4 * projection_matrix)
+SimpleRenderer::SimpleRenderer(SProjection* projection_matrix)
 	: m_ProjectionMatrix(projection_matrix)
 {
 }
@@ -10,7 +10,7 @@ void SimpleRenderer::Init()
 	m_Shader.Init();
 	m_Shader.Start();
 	assert(m_ProjectionMatrix != nullptr);
-	m_Shader.LoadProjectionMatrix(*m_ProjectionMatrix);
+	m_Shader.LoadProjectionMatrix(m_ProjectionMatrix->GetProjectionMatrix());
 	m_Shader.Stop();
 }
 

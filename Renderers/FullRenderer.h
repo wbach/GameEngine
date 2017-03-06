@@ -1,10 +1,13 @@
 #pragma once
 #include "Renderer.h"
 #include "Entity/EntityRenderer.h"
+#include "Framebuffer/DeferedFrameBuffer/DeferedFrameBuffer.h"
+#include "LightPassRenderer.h"
+
 class FullRenderer : public CRenderer
 {
-    public:
-	FullRenderer(glm::mat4* projection_matrix, bool use_simple_render = false);
+public:
+	FullRenderer(SProjection* projection_matrix);
 	// Loading lights itp to shader
 	virtual void Init() override;
 	virtual void PrepareFrame(CScene* scene) override;
@@ -12,8 +15,11 @@ class FullRenderer : public CRenderer
 	virtual void EndFrame(CScene* scene) override;
 private:
 
-	glm::mat4* m_ProjectionMatrix;
+	SProjection* m_ProjectionMatrix;
 
 	//ShadowMap renderes, etc...
 	std::vector<std::unique_ptr<CRenderer>> m_Renderers;
+
+	CLightPassRenderer m_LightPassRenderer;
+	CDefferedFrameBuffer m_DefferedFrameBuffer;
 };

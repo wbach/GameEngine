@@ -21,6 +21,8 @@ public:
 	}
 	const glm::mat4& GetProjectionMatrix() const { return m_ProjectionMatrix; }
 	glm::mat4* GetProjectionMatrixPtr() { return &m_ProjectionMatrix; }
+	const wb::vec2i& GetWindowSize() {return m_WindowSize;}
+	float GetViewDistance() { return 0.8f * m_FarPlane; }
 private:
 	void CreateProjectionMatrix()
 	{

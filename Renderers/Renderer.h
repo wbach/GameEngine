@@ -1,5 +1,6 @@
 #pragma once
 #include "../Scene/Scene.hpp"
+#include "../Engine/Projection.h"
 
 class CRenderer
 {

@@ -5,7 +5,7 @@
 class SimpleRenderer : public CRenderer
 {
 public:
-    SimpleRenderer(glm::mat4* projection_matrix);
+    SimpleRenderer(SProjection* projection_matrix);
 
 	virtual void Init() override;
 	virtual void PrepareFrame(CScene* scene) override;
@@ -16,5 +16,5 @@ private:
 	void BindTextures(const SMaterial& material) const;
 
 	CSimpleEntityShader m_Shader;
-	glm::mat4* m_ProjectionMatrix;
+	SProjection* m_ProjectionMatrix;
 };

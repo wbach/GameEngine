@@ -6,7 +6,7 @@
 class CFrameBuffer
 {
 public:
-	virtual void Init(const glm::vec2& size) = 0;
+	virtual void Init(const wb::vec2i& size) = 0;
 	void CreateFrameBuffer();
 	void AddTexture(GLuint& texture);
 	void SetDepthTexture(const GLuint& texture);

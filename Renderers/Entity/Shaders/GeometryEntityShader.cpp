@@ -30,8 +30,8 @@ void CEntityGeometryPassShader::GetAllUniformLocations()
 void CEntityGeometryPassShader::ConnectTextureUnits()
 {
 	LoadValue(location_ModelTexture, 0);
-	LoadValue(location_NormalMap, 1);
-	LoadValue(location_ShadowMap, 2);
+	LoadValue(location_NormalMap, 2);
+	LoadValue(location_ShadowMap, 3);
 }
 
 void CEntityGeometryPassShader::BindAttributes()
