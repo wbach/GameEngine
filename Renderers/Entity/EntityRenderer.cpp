@@ -1,8 +1,9 @@
 #include "EntityRenderer.h"
 
-CEntityRenderer::CEntityRenderer(SProjection* projection_matrix)
+CEntityRenderer::CEntityRenderer(SProjection* projection_matrix, std::weak_ptr<CFrameBuffer> framebuffer)
 	: m_ProjectionMatrix(projection_matrix)
 	, m_ClipPlane(glm::vec4(0, 1, 0, 100000))
+	, CRenderer(framebuffer)
 {
 }
 
@@ -30,9 +31,16 @@ void CEntityRenderer::PrepareFrame(CScene * scene)
 
 void CEntityRenderer::Render(CScene * scene)
 {
+	auto target = m_Target.lock();
+	if (!target)
+		return;
+	target->BindToDraw();
+
 	m_Shader.Start();
-	for (auto& entity : scene->GetEntities())
+	for (auto& entity : m_Subscribes)
 	{
+		if(entity == nullptr)
+			CLogger::Instance().Log("[Error] Null subsciber in EnityRenderer.");
 		if (entity->GetModel() == nullptr)
 			continue;
 
@@ -44,6 +52,13 @@ void CEntityRenderer::Render(CScene * scene)
 void CEntityRenderer::EndFrame(CScene * scene)
 {	
 	m_Shader.Stop();
+}
+
+void CEntityRenderer::Subscribe(CGameObject * gameObject)
+{
+	auto entity = dynamic_cast<CEntity*>(gameObject);
+	if (entity != nullptr)
+		m_Subscribes.push_back(entity);
 }
 
 void CEntityRenderer::RenderModel(CModel * model, const glm::mat4 & transform_matrix) const

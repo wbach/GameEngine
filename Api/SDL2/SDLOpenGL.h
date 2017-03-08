@@ -1,7 +1,8 @@
 #pragma once
+#include "../../Debug/Log.h"
+#include "InputSDL.h"
 #include "../Api.hpp"
 #include <SDL2/SDL.h>
-#include "InputSDL.h"
 #include <GL/glew.h>
 #include <memory>
 

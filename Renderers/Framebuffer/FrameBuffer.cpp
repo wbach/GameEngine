@@ -22,7 +22,7 @@ int CFrameBuffer::CheckStatus()
 
 	if (Status != GL_FRAMEBUFFER_COMPLETE)
 	{
-		printf("[Error]  FB error, status: 0x%x\n", Status);
+		CLogger::Instance().Log("[Error] FB error, status: " + std::to_string(Status));
 		return -1;
 	}
 	return 0;

@@ -1,9 +1,10 @@
 #pragma once
-#include <string>
+#include "../Debug/Log.h"
 #include "../Api/SDL2/SDLOpenGL.h"
-#include "glm/glm.hpp"
 #include "../Utils/Utils.h"
 #include <memory>
+#include <string>
+#include "glm/glm.hpp"
 
 class CDisplayManager
 {

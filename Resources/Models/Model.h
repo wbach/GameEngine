@@ -2,6 +2,7 @@
 #include "Mesh.h"
 #include <list>
 #include "../OpenGLObject.h"
+#include "../../Debug/Log.h"
 
 class CModel : public COpenGLObject
 {
@@ -22,7 +23,7 @@ public:
 	CMesh* AddMesh(std::vector<float>& positions, std::vector<float>& text_coords, std::vector<float>& normals, std::vector<float>& tangents,
 		std::vector<unsigned short>& indices, SMaterial& material, std::vector<SVertexBoneData>& bones);
 	const std::list<CMesh>& GetMeshes() const {return m_Meshes;	}
-	glm::vec3& GetNormalizedScaleVector(float x, float y, float z) const;
+	glm::vec3 GetNormalizedScaleVector(float x, float y, float z) const;
 	void	CalculateBoudnigBox();
 
 	bool operator==(const CModel &q) { return m_Filename.compare(q.m_Filename) == 0; }

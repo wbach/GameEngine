@@ -11,9 +11,12 @@ CDisplayManager::CDisplayManager(std::unique_ptr<CApi> api, const std::string& w
 	, m_LastFrameTime(0)
 	, m_WindowsSize({w, h})
 {
-	if (m_Api == nullptr)
-		throw std::runtime_error("[Error] API not set!.Press any key.");
-
+	if (m_Api == nullptr) 
+	{
+		CLogger::Instance().Log("[Error] API not set!.Press any key.");
+		return;
+	}
+		
 	m_Api->CreateOpenGLWindow(window_name, w, h, full_screen);
 }
 

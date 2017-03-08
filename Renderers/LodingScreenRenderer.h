@@ -11,7 +11,6 @@ public:
 	virtual void PrepareFrame(CScene* scene) override {};
 	virtual void Render(CScene* scene)  override;
 	virtual void EndFrame(CScene* scene) override {};
-
 private:
 	CLoadingShader m_LoadingShader;
 	SSimpleQuad   quad;

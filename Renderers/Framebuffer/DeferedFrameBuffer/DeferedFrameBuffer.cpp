@@ -34,3 +34,15 @@ void CDefferedFrameBuffer::Init(const wb::vec2i& size)
 
 	UnBindDraw();
 }
+
+void CDefferedFrameBuffer::Clean()
+{
+	BindToDraw();
+
+	glDepthMask(GL_TRUE);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glEnable(GL_DEPTH_TEST);
+	glDisable(GL_BLEND);
+
+	UnBind();
+}

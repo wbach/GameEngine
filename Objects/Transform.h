@@ -15,7 +15,11 @@ public:
 	glm::vec2 GetPositionXZ() { return glm::vec2(position.x, position.z); }
 	const glm::mat4& GetMatrix() const { return matrix; }
 
-	void SetNormalizedSize(const glm::vec3& size) { normalized = size;  UpdateMatrix(); }
+	void SetNormalizedSize(const glm::vec3& size)
+	{ 
+		normalized = size;  
+		UpdateMatrix(); 
+	}
 	void SetPosition(const glm::vec3& pos) { position = pos;  UpdateMatrix(); }
 private:
 	glm::vec3 position;

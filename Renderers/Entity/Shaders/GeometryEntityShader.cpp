@@ -44,8 +44,12 @@ void CEntityGeometryPassShader::BindAttributes()
 }
 
 void CEntityGeometryPassShader::Init()
-{
-	InitShaderProgram("../Data/Shaders/Entity/EntityGeometryPassShader.vert", "../Data/Shaders/Entity/EntityGeometryPassShader.frag");
+{	
+	CreateProgram();
+	AddShader("../Shaders/Entity/EntityGeometryPassShader.vert", GL_VERTEX_SHADER);
+	AddShader("../Shaders/Entity/EntityGeometryPassShader.frag", GL_FRAGMENT_SHADER);
+	FinalizeShader();
+	
 	Start();
 	GetAllUniformLocations();
 	ConnectTextureUnits();

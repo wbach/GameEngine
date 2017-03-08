@@ -9,6 +9,7 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtx/transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
+#include "../Debug/Log.h"
 
 const int MAX_BONES = 100;
 
@@ -17,9 +18,10 @@ class CShaderProgram
 public:
 	virtual ~CShaderProgram();
 
-	void InitShaderProgram(char* vertex_shader_file, char* fragment_shader_file);
-	void InitShaderProgram(char* vertex_shader_file, char* fragment_shader_file, char* geometry_shader_file);
-	void InitShaderProgram(char* vertex_shader_file, char* fragment_shader_file, char *tesselation_shader_file, char * tesselation_evaluation_shader_file);
+	bool CreateProgram();
+	bool AddShader(const std::string& filename, GLenum mode);
+	bool FinalizeShader();
+
 	void Start() const;
 	void Stop() const;
 	void BindAttribute(int attribute, const std::string& variableName) const;
@@ -28,7 +30,7 @@ public:
 protected:
 	virtual void GetAllUniformLocations() {}
 	virtual void BindAttributes() {}
-    void LoadValue(unsigned int loacation, const int& value) const;
+	void LoadValue(unsigned int loacation, const int& value) const;
 	void LoadValue(unsigned int loacation, const float& value) const;
 	void LoadValue(unsigned int loacation, const glm::vec2& value) const;
 	void LoadValue(unsigned int loacation, const glm::vec3& value) const;
@@ -36,15 +38,6 @@ protected:
 	void LoadValue(unsigned int loacation, const glm::mat3& value) const;
 	void LoadValue(unsigned int loacation, const glm::mat4& value) const;
 private:
-	unsigned int LoadShader(char *filename, unsigned int mode);
-
-	int m_ProgramID;
-	int m_VertexShaderID;
-	int m_FragmentShaderID;
-	int m_GeometryShaderID;
-	int m_TesselationControlShaderID;
-	int m_TesselationEvaluationShaderID;
-
-	bool m_IsInitialized = false;
-	bool m_GeometryShader = false;
+	int m_ProgramID = 0;
+	std::list<GLuint> m_ShaderObjectsList;
 };

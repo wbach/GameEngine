@@ -7,13 +7,14 @@ CMyModel::CMyModel(CTextureLoader & texture_lodaer)
 
 CMyModel::~CMyModel()
 {
-	std::cout << "Destructor my model" << std::endl;
+	CLogger::Instance().Log("Destructor my model : " + m_Filename);
 }
 
 void CMyModel::InitModel(const std::string & file_name)
 {	
 	ParseObjFile(file_name);
 	AddFinalMeshes();
+	CModel::InitModel(file_name);
 }
 void CMyModel::ParseObjFile(const std::string& file_name)
 {
@@ -75,7 +76,6 @@ void CMyModel::ParseObjFile(const std::string& file_name)
 void CMyModel::ReadMaterialFile(const std::string& file_name)
 {
 	auto file = Utils::ReadFile(file_name);
-//	std::cout << file << std::endl;
 
 	std::istringstream f(file);
 	std::string line;

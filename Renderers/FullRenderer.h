@@ -1,6 +1,7 @@
 #pragma once
 #include "Renderer.h"
 #include "Entity/EntityRenderer.h"
+#include "Terrain/TerrainRenderer.h"
 #include "Framebuffer/DeferedFrameBuffer/DeferedFrameBuffer.h"
 #include "LightPassRenderer.h"
 
@@ -13,13 +14,11 @@ public:
 	virtual void PrepareFrame(CScene* scene) override;
 	virtual void Render(CScene* scene) override;
 	virtual void EndFrame(CScene* scene) override;
+	virtual void Subscribe(CGameObject* gameObject) override;
 private:
-
 	SProjection* m_ProjectionMatrix;
 
 	//ShadowMap renderes, etc...
 	std::vector<std::unique_ptr<CRenderer>> m_Renderers;
-
-	CLightPassRenderer m_LightPassRenderer;
-	CDefferedFrameBuffer m_DefferedFrameBuffer;
+	std::shared_ptr<CDefferedFrameBuffer> m_DefferedFrameBuffer;
 };

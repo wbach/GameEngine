@@ -8,6 +8,7 @@
 #include "Projection.h"
 #include "../Resources/ResourceManager.h"
 #include "../Renderers/SimpleRenderer.h"
+#include "../Debug/Log.h"
 
 class CEngine
 {
@@ -25,9 +26,9 @@ public:
 	CDisplayManager m_DisplayManager;
 	CInputManager	m_InputManager;
 	std::unique_ptr<CScene> m_Scene;
+	std::unique_ptr<CRenderer> m_Renderer;
 private:	
-	std::unique_ptr<CLoadingScreenRenderer> m_LoadingScreenRenderer;
-	std::vector<std::unique_ptr<CRenderer>> m_Renderers;
+	std::unique_ptr<CLoadingScreenRenderer> m_LoadingScreenRenderer;	
 
 	SProjection m_Projection;
 	//Global items, loading screen etc...

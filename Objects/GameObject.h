@@ -8,6 +8,7 @@
 class CGameObject
 {
 public:
+	virtual ~CGameObject() {}
 	CGameObject();
         const std::list<std::unique_ptr<CGameObject>>& GetChildrens() { return m_Childrens; }
 		CTransform m_LocalTransform;

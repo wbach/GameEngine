@@ -29,12 +29,10 @@ void CEngine::GameLoop()
 			case 1: m_ApiMessage = ApiMessages::QUIT; break;
 			}
 
-			for (auto& renderer : m_Renderers)
-			{
-				renderer->PrepareFrame(m_Scene.get());
-				renderer->Render(m_Scene.get());
-				renderer->EndFrame(m_Scene.get());
-			}				
+			m_Renderer->PrepareFrame(m_Scene.get());
+			m_Renderer->Render(m_Scene.get());
+			m_Renderer->EndFrame(m_Scene.get());
+					
 		}
 		m_DisplayManager.Update();
 		m_InputManager.CheckReleasedKeys();
@@ -90,7 +88,7 @@ void CEngine::LoadScene()
 	auto start = std::chrono::high_resolution_clock::now();
 	m_Scene->Initialize();
 	auto end = std::chrono::high_resolution_clock::now();
-	std::cout << "Loading time: " << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() / 1000.f << "s.\n";
+	CLogger::Instance().Log("Scene loading time: " + std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() / 1000.f ) + "s.");
 //	std::this_thread::sleep_for(std::chrono::seconds(10));
 	SetIsLoading(false);
 }
@@ -113,7 +111,7 @@ int CEngine::ReadConfiguration(const std::string & file_name)
 	file.open(file_name);
 	if (!file.is_open())
 	{
-		std::cout << "[Error] Cant open configuration file." << std::endl;
+		CLogger::Instance().Log("[Error] Cant open configuration file.");
 		return -1;
 	}
 	std::string line;
@@ -150,10 +148,9 @@ void CEngine::Init()
 {
 	glEnable(GL_DEPTH_TEST);
 
-    m_Renderers.push_back(std::make_unique<FullRenderer>(&m_Projection));
+	m_Renderer = std::make_unique<FullRenderer>(&m_Projection);
 
-	for (auto& renderer : m_Renderers)
-		renderer->Init();
+	m_Renderer->Init();
 	
 	auto circleTexture	= m_ResorceManager.GetTextureLaoder().LoadTextureImmediately("../Data/GUI/circle2.png");
 	auto bgtexture		= m_ResorceManager.GetTextureLaoder().LoadTextureImmediately("../Data/GUI/black-knight-dark-souls.png", TextureType::MATERIAL, TextureFlip::VERTICAL);

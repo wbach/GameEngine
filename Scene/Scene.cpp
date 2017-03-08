@@ -5,23 +5,11 @@ CScene::CScene()
 {
 }
 
-void CScene::AddObject(std::unique_ptr<CGameObject> object)
+CGameObject* CScene::AddGameObject(CGameObject* object, const glm::vec3& position)
 {
-	//m_Objects.push_back(object);
-}
-
-CEntity* CScene::AddEntity(const std::string & filename, const glm::vec3 normalized_scale, const glm::vec3& position)
-{
-	auto model = m_ResourceManager.LoadModel(filename);
-	m_ResourceManager.GetOpenGlLoader().AddObjectToOpenGLLoadingPass(model);
-	m_Entities.push_back(std::make_unique<CEntity>(model));
-	model->CalculateBoudnigBox();
-	auto entity = m_Entities.back().get();
-	auto vec = model->GetNormalizedScaleVector(normalized_scale.x, normalized_scale.y, normalized_scale.z);
-	Utils::PrintVector("", vec);
-	entity->m_WorldTransform.SetNormalizedSize(vec);
-	entity->m_WorldTransform.SetPosition(position);
-	return entity;
+	object->m_WorldTransform.SetPosition(position);
+	m_GameObjects.emplace_back(object);
+	return m_GameObjects.back().get();
 }
 
 std::list<CGameObject*> CScene::GetObjectInRange(const glm::vec3 & position, float range)

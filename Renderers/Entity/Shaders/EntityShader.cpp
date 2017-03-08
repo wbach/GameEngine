@@ -2,7 +2,11 @@
 
 void CEntityShader::Init()
 {
-	InitShaderProgram("Data/Shaders/Simple/SimpleEntityShader.vert", "Data/Shaders/Simple/SimpleEntityShader.frag");
+	CreateProgram();
+	AddShader("../Shaders/Simple/SimpleEntityShader.vert", GL_VERTEX_SHADER);
+	AddShader("../Shaders/Simple/SimpleEntityShader.frag", GL_FRAGMENT_SHADER);
+	FinalizeShader();
+
 	Start();
 	GetAllUniformLocations();
 	Stop();

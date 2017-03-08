@@ -2,7 +2,11 @@
 
 void CLoadingShader::Init()
 {
-	InitShaderProgram("../Data/Shaders/Game/loadingShader.vert", "../Data/Shaders/Game/loadingShader.frag");
+	CreateProgram();
+	AddShader("../Shaders/Game/loadingShader.vert", GL_VERTEX_SHADER);
+	AddShader("../Shaders/Game/loadingShader.frag", GL_FRAGMENT_SHADER);
+	FinalizeShader();
+
 	Start();
 	GetAllUniformLocations();
 	ConnectTextureUnits();

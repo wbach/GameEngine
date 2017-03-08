@@ -22,7 +22,7 @@ void SimpleRenderer::PrepareFrame(CScene * scene)
 
 void SimpleRenderer::Render(CScene * scene)
 {
-	for (auto& entity : scene->GetEntities())
+	for (auto& entity : m_Subscribes)
 	{
 		if (entity->GetModel() == nullptr)
 			continue;
@@ -34,6 +34,13 @@ void SimpleRenderer::Render(CScene * scene)
 void SimpleRenderer::EndFrame(CScene * scene)
 {
 	m_Shader.Stop();
+}
+
+void SimpleRenderer::Subscribe(CGameObject * gameObject)
+{
+	auto entity = dynamic_cast<CEntity*>(gameObject);
+	if (entity != nullptr)
+		m_Subscribes.push_back(entity);
 }
 
 void SimpleRenderer::RenderModel(CModel * model, const glm::mat4 & transform_matrix) const

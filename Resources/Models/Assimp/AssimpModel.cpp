@@ -19,6 +19,7 @@ void CAssimModel::InitModel(const std::string& file_name)
 	if (!Utils::CheckFile(file_name))
 	{
 		std::string error = "[Error] The file " + m_Filename + " wasnt successfuly opened";
+		CLogger::Instance().Log(error);
 		throw std::runtime_error(error.c_str());
 	}
 
@@ -28,7 +29,6 @@ void CAssimModel::InitModel(const std::string& file_name)
 		| aiProcess_OptimizeGraph | aiProcess_OptimizeMeshes;
 	//if(normals == "flat" ) flags |= aiProcess_GenNormals ;
 	//if(normals == "smooth" ) flags |= aiProcess_GenSmoothNormals ;
-	//std::cout << " The file " << file_name << "*********************************************************** " << std::endl;
 	m_Scene = importer.ReadFile(m_Filename.c_str(), flags);// aiImportFile(m_Filename.c_str(), flags);
 	if (m_Scene)
 	{
@@ -46,8 +46,10 @@ void CAssimModel::InitModel(const std::string& file_name)
 	else
 	{
 		std::string error = "Error parsing " + file_name +importer.GetErrorString();
+		CLogger::Instance().Log(error);
 		throw std::runtime_error(error.c_str());
 	}
+	CModel::InitModel(file_name);
 }
 
 void CAssimModel::ReadCollisions(std::string file_name, std::vector<float>& postions, std::vector<float>& normals, std::vector<unsigned int>& indices)
@@ -55,6 +57,7 @@ void CAssimModel::ReadCollisions(std::string file_name, std::vector<float>& post
 	if (!Utils::CheckFile(file_name))
 	{
 		std::string error = "[Error] The file " + file_name + " wasnt successfuly opened";
+		CLogger::Instance().Log(error);
 		throw std::runtime_error(error.c_str());
 	}
 
@@ -74,6 +77,7 @@ void CAssimModel::ReadCollisions(std::string file_name, std::vector<float>& post
 	else
 	{
 		std::string error = "Error parsing " + file_name;
+		CLogger::Instance().Log(error);
 		throw std::runtime_error(error.c_str());
 	}
 	aiReleaseImport(scene);
@@ -81,8 +85,6 @@ void CAssimModel::ReadCollisions(std::string file_name, std::vector<float>& post
 
 CAssimModel::~CAssimModel()
 {
-	std::cout << "Assimp destructor \n";
-
 	if (!m_IsInit)
 		return;
 
@@ -90,7 +92,7 @@ CAssimModel::~CAssimModel()
 	{
 		///aiReleaseImport(m_Scene);
 	}
-
+	CLogger::Instance().Log("Destructor assimp model : " + m_Filename);
 }
 void CAssimModel::RecursiveProcess(const aiScene *scene, aiNode * node, std::vector<float>& postions, std::vector<float>& normals, std::vector<unsigned int>& indices)
 {

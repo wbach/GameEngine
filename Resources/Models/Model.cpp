@@ -9,11 +9,11 @@ CModel::CModel()
 void CModel::InitModel(const std::string&  file_name)
 {
 	m_Filename = file_name;
+	CLogger::Instance().Log(file_name + " succesful loaded");
 }
 
 CModel::~CModel() 
 {
-	std::cout << "Base model destructor \n";
 }
 
 void CModel::OpenGLLoadingPass()
@@ -38,7 +38,7 @@ CMesh * CModel::AddMesh(std::vector<float>& positions, std::vector<float>& text_
 	return &m_Meshes.back();
 }
 
-glm::vec3 & CModel::GetNormalizedScaleVector(float w, float h, float z) const
+glm::vec3 CModel::GetNormalizedScaleVector(float w, float h, float z) const
 {
 	int axis;
 	if (w == 0 && h == 0 && z == 0)
@@ -51,7 +51,7 @@ glm::vec3 & CModel::GetNormalizedScaleVector(float w, float h, float z) const
 		axis = 3;
 
 
-	glm::vec3 scale_vector;
+	glm::vec3 scale_vector(1.f);
 	switch (axis)
 	{
 	case 1:

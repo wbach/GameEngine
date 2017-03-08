@@ -1,13 +1,12 @@
 #pragma once
 #include "../Renderer.h"
-#include "Shaders/GeometryEntityShader.h"
+#include "Shaders/TerrainShader.h"
 #include "../../Utils/OpenGL/OpenGLUtils.h"
-#include "../Framebuffer/DeferedFrameBuffer/DeferedFrameBuffer.h"
 
-class CEntityRenderer : public CRenderer
+class CTerrainRenderer : public CRenderer
 {
 public:
-    CEntityRenderer(SProjection* projection_matrix, std::weak_ptr<CFrameBuffer> framebuffer);
+	CTerrainRenderer(SProjection* projection_matrix);
 	// Loading lights itp to shader
 	virtual void Init() override;
 	virtual void PrepareFrame(CScene* scene) override;
@@ -18,10 +17,11 @@ public:
 private:
 	void BindMaterial(const SMaterial& material) const;
 	void UnBindMaterial(const SMaterial& material) const;
-	CEntityGeometryPassShader m_Shader;
-	SProjection* m_ProjectionMatrix;
+
+	CTerrainShader m_Shader;
+	SProjection*	m_ProjectionMatrix;
+
+	std::list<CTerrain*> m_Subscribes;
 
 	glm::vec4	m_ClipPlane;
-
-	std::list<CEntity*> m_Subscribes;
 };

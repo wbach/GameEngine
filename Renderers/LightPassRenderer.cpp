@@ -1,7 +1,8 @@
 #include "LightPassRenderer.h"
 
-CLightPassRenderer::CLightPassRenderer(SProjection * projection)
+CLightPassRenderer::CLightPassRenderer(SProjection * projection, std::weak_ptr<CFrameBuffer> frambuffer)
 	: m_Projection(projection)
+	, CRenderer(frambuffer)
 {
 }
 
@@ -23,6 +24,18 @@ void CLightPassRenderer::PrepareFrame(CScene * scene)
 
 void CLightPassRenderer::Render(CScene * scene)
 {	
+	glDepthMask(GL_FALSE);
+	glDisable(GL_DEPTH_TEST);
+	glEnable(GL_BLEND);
+
+	auto target = m_Target.lock();
+
+	if (target == nullptr)
+		return;
+
+	target->BindTextures();
+	target->UnBind();
+
 	m_Shader.Start();
 	m_Shader.LoadSkyColour(glm::vec3(0.8) /** scene->m_DayNightCycle.GetDayNightBlendFactor()*/);
 	m_Shader.LoadCameraPosition(scene->GetCamera()->GetPosition());

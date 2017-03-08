@@ -15,11 +15,13 @@ void CSdlOpenGlApi::CreateOpenGLWindow(const std::string& window_name, const int
 #endif
 	if (!(m_Window = SDL_CreateWindow(window_name.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, flags)))
 	{
-		throw std::runtime_error("SDL_CreateWindowerror.");
+		CLogger::Instance().Log("[Error] SDL_CreateWindow error.");
+		return;
 	}
 	if (!(m_GlContext = SDL_GL_CreateContext(m_Window)))
 	{
-		throw std::runtime_error("SDL_GL_CreateContext error.");
+		CLogger::Instance().Log("[Error] SDL_GL_CreateContext error.");
+		return;
 	}
 	if (full_screen)
 		SetFullScreen(true);
@@ -27,10 +29,12 @@ void CSdlOpenGlApi::CreateOpenGLWindow(const std::string& window_name, const int
 	GLint glew_init_result = glewInit();
 	if (glew_init_result != GLEW_OK)
 	{
-		printf("ERROR: %s\n", glewGetErrorString(glew_init_result));
-		throw std::runtime_error("[Error] GLEW init failed.");
+		std::string err(reinterpret_cast< char const * >(glewGetErrorString(glew_init_result)));
+		CLogger::Instance().Log("[Error] Glew init error : " + err);
+		return;
 	}
-	printf("GL version: %s\n\n", glGetString(GL_VERSION));
+	std::string ver(reinterpret_cast< char const * >(glGetString(GL_VERSION)));
+	CLogger::Instance().Log("GL version: " + ver);
 }
 
 void CSdlOpenGlApi::UpdateWindow()

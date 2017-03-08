@@ -1,12 +1,14 @@
 #pragma once
-#include <GL/glew.h>
+#include "../../Debug/Log.h"
 #include "../../Utils/Utils.h"
 #include <vector>
+#include <GL/glew.h>
 
 class CFrameBuffer
 {
 public:
 	virtual void Init(const wb::vec2i& size) = 0;
+	virtual void Clean() {}
 	void CreateFrameBuffer();
 	void AddTexture(GLuint& texture);
 	void SetDepthTexture(const GLuint& texture);
