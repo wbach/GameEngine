@@ -15,12 +15,12 @@ void CSdlOpenGlApi::CreateOpenGLWindow(const std::string& window_name, const int
 #endif
 	if (!(m_Window = SDL_CreateWindow(window_name.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, flags)))
 	{
-		CLogger::Instance().Log("[Error] SDL_CreateWindow error.");
+		Log("[Error] SDL_CreateWindow error.");
 		return;
 	}
 	if (!(m_GlContext = SDL_GL_CreateContext(m_Window)))
 	{
-		CLogger::Instance().Log("[Error] SDL_GL_CreateContext error.");
+		Log("[Error] SDL_GL_CreateContext error.");
 		return;
 	}
 	if (full_screen)
@@ -30,11 +30,19 @@ void CSdlOpenGlApi::CreateOpenGLWindow(const std::string& window_name, const int
 	if (glew_init_result != GLEW_OK)
 	{
 		std::string err(reinterpret_cast< char const * >(glewGetErrorString(glew_init_result)));
-		CLogger::Instance().Log("[Error] Glew init error : " + err);
+		Log("[Error] Glew init error : " + err);
 		return;
 	}
 	std::string ver(reinterpret_cast< char const * >(glGetString(GL_VERSION)));
-	CLogger::Instance().Log("GL version: " + ver);
+	Log("GL version: " + ver);
+
+	std::string glslver(reinterpret_cast< char const * >(glGetString(GL_SHADING_LANGUAGE_VERSION)));
+	Log("GLSL version: " + glslver);
+
+	GLint MaxPatchVertices = 0;
+	glGetIntegerv(GL_MAX_PATCH_VERTICES, &MaxPatchVertices);
+	Log("Max supported patch vertices :" +  std::to_string(MaxPatchVertices));
+	glPatchParameteri(GL_PATCH_VERTICES, 3);
 }
 
 void CSdlOpenGlApi::UpdateWindow()

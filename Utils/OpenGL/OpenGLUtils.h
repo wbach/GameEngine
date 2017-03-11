@@ -99,13 +99,13 @@ namespace Utils
 		glDisable(GL_CULL_FACE);
 	}
 
-	static void SimpleRenderVao(const GLuint & vao, int indices, int attributes = 1)
+	static void SimpleRenderVao(const GLuint & vao, int indices, int attributes = 1, GLenum mode = GL_TRIANGLES)
 	{
 		glBindVertexArray(vao);
 		for (int x = 0; x < attributes; x++)
 			glEnableVertexAttribArray(x);
 
-		glDrawElements(GL_TRIANGLES, indices, GL_UNSIGNED_SHORT, 0);
+		glDrawElements(mode, indices, GL_UNSIGNED_SHORT, 0);
 
 		for (int x = attributes; x > 0; x--)
 			glDisableVertexAttribArray(x);

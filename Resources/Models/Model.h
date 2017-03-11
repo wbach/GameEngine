@@ -2,7 +2,7 @@
 #include "Mesh.h"
 #include <list>
 #include "../OpenGLObject.h"
-#include "../../Debug/Log.h"
+#include "../../Debug_/Log.h"
 
 class CModel : public COpenGLObject
 {
@@ -14,7 +14,7 @@ public:
 
 	virtual ~CModel();
 	virtual void Update(float dt) {};	
-	virtual const std::vector<glm::mat4>& GetBonesTransforms(unsigned int mesh_id) { return  std::vector<glm::mat4>(); }
+	virtual const std::vector<glm::mat4>* GetBonesTransforms(unsigned int mesh_id) { return nullptr; }
 	virtual void AddCurrentFramePtr(unsigned int* ptr) { m_CurrentFrames.push_back(ptr); }
 	virtual void SetCurrentFrame(unsigned int& current_frame) {}
 	virtual void SetTime(const float& time) {}

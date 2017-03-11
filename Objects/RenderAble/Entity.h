@@ -6,6 +6,7 @@
 class CEntity : public CGameObject
 {
 public:
+	virtual ~CEntity() {}
 	CEntity(CResourceManager& manager, const std::string& filename, const glm::vec3& normalized_scale);
 	CEntity(CModel* model, const glm::vec3 normalized_v)
 		: m_Model(model)

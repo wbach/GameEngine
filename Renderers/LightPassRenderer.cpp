@@ -16,6 +16,8 @@ void CLightPassRenderer::Init()
 	m_Shader.Stop();
 
 	m_Quad.Init();
+
+	Log("CLightPassRenderer initialized.");
 }
 
 void CLightPassRenderer::PrepareFrame(CScene * scene)
@@ -24,6 +26,8 @@ void CLightPassRenderer::PrepareFrame(CScene * scene)
 
 void CLightPassRenderer::Render(CScene * scene)
 {	
+	glPolygonMode(GL_FRONT, GL_FILL);
+	glPolygonMode(GL_BACK, GL_FILL);
 	glDepthMask(GL_FALSE);
 	glDisable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);

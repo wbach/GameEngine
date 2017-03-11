@@ -1,5 +1,5 @@
 #pragma once
-#include "../../Debug/Log.h"
+#include "../../Debug_/Log.h"
 #include "../../Utils/Utils.h"
 #include <vector>
 #include <GL/glew.h>

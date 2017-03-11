@@ -13,8 +13,8 @@ void CMaterialTexture::OpenGLLoadingPass()
 {
 	if (m_Image.m_Data == nullptr || m_IsInit)
 	{
-		std::string error = "[Error] OGL There was an error loading the texture : " + m_Filename + "\n";
-		throw std::runtime_error(error.c_str());
+		Log("[Error] OGL There was an error loading the texture : " + m_Filename);
+		return;
 	}
 
 	glGenTextures(1, &m_Id);
@@ -23,8 +23,8 @@ void CMaterialTexture::OpenGLLoadingPass()
 	if (hubo_error)
 	{
 		delete[] m_Image.m_Data;
-		std::string error = "[Error] OGL There was an error loading the texture : " + m_Filename + "\n";
-		throw std::runtime_error(error.c_str());
+		Log("[Error] OGL There was an error loading the texture : " + m_Filename);
+		return;
 	}
 
 	// "Bind" the newly created texture : all future texture functions will modify this texture

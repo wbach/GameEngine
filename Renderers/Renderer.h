@@ -2,7 +2,7 @@
 #include "../Scene/Scene.hpp"
 #include "../Engine/Projection.h"
 #include "../Objects/GameObject.h"
-#include "../Debug/Log.h"
+#include "../Debug_/Log.h"
 #include "Framebuffer/FrameBuffer.h"
 
 class CRenderer

@@ -25,7 +25,7 @@ private:
 	
 	virtual void SetTime(const float& time) override;
 	virtual void Update(float delta_time) override;
-	virtual const std::vector<glm::mat4>& GetBonesTransforms(unsigned int mesh_id) override;
+	virtual const std::vector<glm::mat4>* GetBonesTransforms(unsigned int mesh_id) override;
 
 	const aiNodeAnim* FindNodeAnim(const aiAnimation* pAnimation, const std::string NodeName);
 	unsigned int FindPosition(float AnimationTime, const aiNodeAnim* pNodeAnim);

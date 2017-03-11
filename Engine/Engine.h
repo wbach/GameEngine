@@ -8,7 +8,7 @@
 #include "Projection.h"
 #include "../Resources/ResourceManager.h"
 #include "../Renderers/SimpleRenderer.h"
-#include "../Debug/Log.h"
+#include "../Debug_/Log.h"
 
 class CEngine
 {

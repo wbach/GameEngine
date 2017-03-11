@@ -6,7 +6,7 @@
 class CTerrainRenderer : public CRenderer
 {
 public:
-	CTerrainRenderer(SProjection* projection_matrix);
+	CTerrainRenderer(SProjection* projection_matrix, std::weak_ptr<CFrameBuffer> framebuffer);
 	// Loading lights itp to shader
 	virtual void Init() override;
 	virtual void PrepareFrame(CScene* scene) override;
@@ -15,8 +15,8 @@ public:
 	virtual void Subscribe(CGameObject* gameObject) override;
 	void RenderModel(CModel* model, const glm::mat4& transform_matrix) const;
 private:
-	void BindMaterial(const SMaterial& material) const;
-	void UnBindMaterial(const SMaterial& material) const;
+	void BindTextures(CTerrain* terrain) const;
+
 
 	CTerrainShader m_Shader;
 	SProjection*	m_ProjectionMatrix;

@@ -1,5 +1,5 @@
 #pragma once
-#include "../../Debug/Log.h"
+#include "../../Debug_/Log.h"
 #include "InputSDL.h"
 #include "../Api.hpp"
 #include <SDL2/SDL.h>

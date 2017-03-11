@@ -3,6 +3,12 @@
 
 struct SImage
 {
-	GLubyte* m_Data;
-	unsigned int m_Width, m_Height;
+	GLubyte* m_Data = nullptr;
+	unsigned int m_Width = 0, m_Height = 0;
+
+	~SImage()
+	{
+		if (m_Data == nullptr)
+			delete m_Data;
+	}
 };

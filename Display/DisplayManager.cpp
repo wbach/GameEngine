@@ -13,7 +13,7 @@ CDisplayManager::CDisplayManager(std::unique_ptr<CApi> api, const std::string& w
 {
 	if (m_Api == nullptr) 
 	{
-		CLogger::Instance().Log("[Error] API not set!.Press any key.");
+		Log("[Error] API not set!.Press any key.");
 		return;
 	}
 		

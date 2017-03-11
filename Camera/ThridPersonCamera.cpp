@@ -1,9 +1,8 @@
 #include "ThridPersonCamera.h"
 
-CThirdPersonCamera::CThirdPersonCamera(CInputManager* input_manager, glm::vec3& look_at_position, glm::vec3& look_at_rotation)
+CThirdPersonCamera::CThirdPersonCamera(CInputManager* input_manager, CTransform& look_at)
 : m_Offset(0.0f)
-, m_LookAtPosition(look_at_position)
-, m_LookAtRotation(look_at_rotation)
+, m_LookAtTransform(look_at)
 , m_Mousevel(0.2f)
 , m_CaptureMouse(true)
 , m_IsShowCursor(false)
@@ -28,11 +27,6 @@ void CThirdPersonCamera::LockCamera()
 		m_Yaw -= 360.0f;
 }
 
-void CThirdPersonCamera::AttachToObject(glm::vec3& position_entity, glm::vec3& rotation_entity) {
-	m_LookAtPosition = position_entity;
-	m_LookAtRotation = rotation_entity;
-}
-
 void CThirdPersonCamera::CalculateInput()
 {
 	glm::vec2 d_move = CalcualteMouseMove() * m_Mousevel;
@@ -46,7 +40,7 @@ void CThirdPersonCamera::Move()
 	float horizontal_distance = CalculateHorizontalDistance() ;
 	float vertical_distance	 = CalculateVerticalDistance() ;
 	CalculateCameraPosition(horizontal_distance, vertical_distance);
-	this->m_Yaw = 180 - (m_LookAtRotation.y + m_AngleAroundPlayer) ;
+	this->m_Yaw = 180 - (m_LookAtTransform.GetRotation().y + m_AngleAroundPlayer) ;
 
 	CCamera::Move();
 }
@@ -56,12 +50,12 @@ void CThirdPersonCamera::SetPosition(glm::vec3 position)
 }
 void CThirdPersonCamera::CalculateCameraPosition(float horizontal_distance, float vertical_distance)
 {
-	float theata  = m_LookAtRotation.y  + m_AngleAroundPlayer;
+	float theata  = m_LookAtTransform.GetRotation().y  + m_AngleAroundPlayer;
 	float x_offset = (float) (horizontal_distance * sin(Utils::ToRadians(theata))) ;
 	float z_offset = (float) (horizontal_distance * cos(Utils::ToRadians(theata))) ;
-	m_Position.x  = m_LookAtPosition.x - x_offset;
-	m_Position.y  = m_LookAtPosition.y + vertical_distance + 1.8f;
-	m_Position.z  = m_LookAtPosition.z - z_offset;
+	m_Position.x  = m_LookAtTransform.GetPosition().x - x_offset;
+	m_Position.y  = m_LookAtTransform.GetPosition().y + vertical_distance + 1.8f;
+	m_Position.z  = m_LookAtTransform.GetPosition().z - z_offset;
 	m_Position	 += m_Offset;
 }
 

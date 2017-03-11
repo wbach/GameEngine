@@ -9,9 +9,10 @@ public:
 	virtual void CalculateInput();
 	virtual void Move();
 	virtual void CalculateZoom(float zoom_lvl) {}
-	virtual void AttachToObject(glm::vec3& position_entity, glm::vec3& rotation_entity) = 0;
+	virtual void AttachToObject(glm::vec3& position_entity, glm::vec3& rotation_entity) {};
 
 	CCamera();
+	virtual ~CCamera() {}
 	void SetProjectionMatrix(const glm::mat4& projection_matrix);
 	void UpdateViewMatrix();
 	void InvertPitch();	

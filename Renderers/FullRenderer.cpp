@@ -4,7 +4,7 @@ FullRenderer::FullRenderer(SProjection* projection_matrix)
 	: m_ProjectionMatrix(projection_matrix)
 	, m_DefferedFrameBuffer(new CDefferedFrameBuffer())
 {
-	//m_Renderers.push_back(std::make_unique<CTerrainRenderer>(projection_matrix));
+	m_Renderers.push_back(std::make_unique<CTerrainRenderer>(projection_matrix, m_DefferedFrameBuffer));
 	m_Renderers.emplace_back(new CEntityRenderer(projection_matrix, m_DefferedFrameBuffer));
 	//LightPass have to be after all geometry passes
 	m_Renderers.emplace_back(new CLightPassRenderer(projection_matrix, m_DefferedFrameBuffer));	
@@ -18,6 +18,7 @@ void FullRenderer::Init()
     {
         renderer->Init();
     }
+	Log("FullRenderer initialized.");
 }
 void FullRenderer::PrepareFrame(CScene* scene)
 {
@@ -27,6 +28,8 @@ void FullRenderer::PrepareFrame(CScene* scene)
     {
         renderer->PrepareFrame(scene);
     }	
+	//glPolygonMode(GL_FRONT, GL_LINE);
+	//glPolygonMode(GL_BACK, GL_LINE);
 }
 void FullRenderer::Render(CScene* scene)
 {

@@ -6,7 +6,7 @@
 #include "glm/glm.hpp"
 #include <vector>
 #include <map>
-#include "../../Debug/Log.h"
+#include "../../Debug_/Log.h"
 
 const int NUM_BONES_PER_VEREX = 4;
 
@@ -32,7 +32,7 @@ struct SVertexBoneData
 				return;
 			}
 		}
-		CLogger::Instance().Log("[Error] To many bones per vertex. Current limit : " + std::to_string(NUM_BONES_PER_VEREX));
+		Log("[Error] To many bones per vertex. Current limit : " + std::to_string(NUM_BONES_PER_VEREX));
 	}
 };
 struct SBoneInfo

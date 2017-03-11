@@ -11,16 +11,14 @@ void CTextureLoader::ReadFile(const std::string & file, SImage& image, TextureFl
 	FREE_IMAGE_FORMAT formato = FreeImage_GetFileType(file.c_str(), 0);
 	if (formato == FIF_UNKNOWN)
 	{
-		std::string error = "[Error] wrong image format or file does not exist." + file + "\n";
-		throw std::runtime_error(error.c_str());
+		Log("[Error] wrong image format or file does not exist." + file);
 		return;
 	}
 
 	FIBITMAP* imagen2 = FreeImage_Load(formato, file.c_str());
 	if (!imagen2)
 	{
-		std::string error = "[Error] wrong image format or file does not exist." + file + "\n";
-		throw std::runtime_error(error.c_str());
+		Log("[Error] wrong image format or file does not exist." + file);
 		return;
 	}
 
@@ -28,7 +26,7 @@ void CTextureLoader::ReadFile(const std::string & file, SImage& image, TextureFl
 	if (!imagen)
 	{
 		FreeImage_Unload(imagen2);
-		throw std::runtime_error(std::string("[Error] Cant convert to 32 bits.\n").c_str());
+		Log("[Error] Cant convert to 32 bits : " + file);
 		return;
 	}
 

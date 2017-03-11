@@ -1,5 +1,6 @@
 #pragma once
 #include "../Input/InputManager.h"
+#include "../Objects/Transform.h"
 #include "Camera.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -7,11 +8,10 @@
 class CThirdPersonCamera : public CCamera
 {
 public:
-	CThirdPersonCamera(CInputManager *input_manager, glm::vec3& look_at_positiom, glm::vec3& look_at_rotation);
+	CThirdPersonCamera(CInputManager *input_manager, CTransform& lookAt);
 
 	void CalculateInput() override;
 	void Move() override;
-	void AttachToObject(glm::vec3& position_entity, glm::vec3& rotation_entity) override;
 	void CalculateZoom(float zoom_lvl) override;
 private:
 	void LockCamera();
@@ -25,8 +25,7 @@ private:
 	void CalculatePitch(glm::vec2 d_move);
 	void CalculateAngleAroundPlayer(glm::vec2 d_move);
 
-	glm::vec3&	m_LookAtPosition;
-	glm::vec3&	m_LookAtRotation;
+	CTransform&	m_LookAtTransform;
 
 	bool		m_IsShowCursor;
 	glm::vec3	m_Offset;

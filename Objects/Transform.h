@@ -11,8 +11,25 @@ public:
 	CTransform(const glm::vec3& pos, const glm::vec3& rot) : CTransform(pos, rot, glm::vec3(1)) {}
 	CTransform(const glm::vec3& pos, const glm::vec3& rot, const glm::vec3& scale) : position(pos), rotation(rot), scale(scale), matrix(Utils::CreateTransformationMatrix(pos, rot, scale)) {}	
 	
+	void IncrasePosition(float dx, float dy, float dz, unsigned int index = 0)
+	{
+		IncrasePosition(glm::vec3(dx, dy, dz));
+	}
+	void IncrasePosition(glm::vec3 v, unsigned int index = 0)
+	{
+		position += v;
+		UpdateMatrix();
+	}
+	void IncreaseRotation(float dx, float dy, float dz)
+	{
+		rotation += glm::vec3(dx, dy, dz);
+		UpdateMatrix();
+	}
 	void UpdateMatrix() { matrix = Utils::CreateTransformationMatrix(position, rotation, scale * normalized); }
-	glm::vec2 GetPositionXZ() { return glm::vec2(position.x, position.z); }
+	
+	glm::vec3 GetPosition() const { return position; }
+	glm::vec3 GetRotation() const { return rotation; }
+	glm::vec2 GetPositionXZ() const { return glm::vec2(position.x, position.z); }
 	const glm::mat4& GetMatrix() const { return matrix; }
 
 	void SetNormalizedSize(const glm::vec3& size)

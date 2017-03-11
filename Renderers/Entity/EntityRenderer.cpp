@@ -15,6 +15,8 @@ void CEntityRenderer::Init()
 	m_Shader.LoadViewDistance(500.f);
 	m_Shader.LoadProjectionMatrix(m_ProjectionMatrix->GetProjectionMatrix());
 	m_Shader.Stop();
+
+	Log("CEntityRenderer initialized.");
 }
 
 void CEntityRenderer::PrepareFrame(CScene * scene)
@@ -40,7 +42,7 @@ void CEntityRenderer::Render(CScene * scene)
 	for (auto& entity : m_Subscribes)
 	{
 		if(entity == nullptr)
-			CLogger::Instance().Log("[Error] Null subsciber in EnityRenderer.");
+			Log("[Error] Null subsciber in EnityRenderer.");
 		if (entity->GetModel() == nullptr)
 			continue;
 

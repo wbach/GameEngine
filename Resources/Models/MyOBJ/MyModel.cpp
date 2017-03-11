@@ -7,7 +7,7 @@ CMyModel::CMyModel(CTextureLoader & texture_lodaer)
 
 CMyModel::~CMyModel()
 {
-	CLogger::Instance().Log("Destructor my model : " + m_Filename);
+	Log("Destructor my model : " + m_Filename);
 }
 
 void CMyModel::InitModel(const std::string & file_name)

@@ -9,7 +9,7 @@ CModel::CModel()
 void CModel::InitModel(const std::string&  file_name)
 {
 	m_Filename = file_name;
-	CLogger::Instance().Log(file_name + " succesful loaded");
+	Log(file_name + " succesful loaded");
 }
 
 CModel::~CModel() 

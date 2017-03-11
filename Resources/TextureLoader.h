@@ -1,13 +1,14 @@
 #pragma once
+#include "../Debug_/Log.h"
+#include "Models/Material.h"
+#include "Textures/MaterialTexture.h"
+#include "OpenGLLoader.h"
 #include <string>
 #include <vector>
 #include <FreeImage.h>
-#include "Models/Material.h"
-#include "Textures/MaterialTexture.h"
 #include <memory>
 #include <algorithm>
 #include <list>
-#include "OpenGLLoader.h"
 #include <FreeImage.h>
 
 namespace TextureType
