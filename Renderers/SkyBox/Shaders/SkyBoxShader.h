@@ -1,5 +1,5 @@
 #pragma once
-#include "../ShaderProgram.h"
+#include "../../../Shaders/ShaderProgram.h"
 
 class CSkyBoxShader : public CShaderProgram
 {

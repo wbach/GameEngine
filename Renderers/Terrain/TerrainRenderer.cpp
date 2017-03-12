@@ -58,7 +58,7 @@ void CTerrainRenderer::Render(CScene * scene)
 			for (auto& m : sub->model->GetMeshes())
 			{			
 				Utils::EnableVao(m.GetVao(), m.GetUsedAttributes());
-				glDrawElements(GL_PATCHES, m.GetVertexCount(), GL_UNSIGNED_SHORT, 0);
+                glDrawElements(GL_PATCHES, m.GetVertexCount(), GL_UNSIGNED_SHORT, 0);
 				Utils::DisableVao(m.GetUsedAttributes());
 			}				
 		}
