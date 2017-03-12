@@ -2,18 +2,17 @@
 
 void CSkyBoxShader::Init()
 {
-	Init("Data/Shaders/SkyBox/SkyboxVertexShader.vert", "Data/Shaders/SkyBox/SkyboxFragmentShader.frag");
-}
+    CreateProgram();
+    AddShader("../Shaders/Light/SkyboxVertexShader.vert", GL_VERTEX_SHADER);
+    AddShader("../Shaders/Light/SkyboxFragmentShader.frag", GL_FRAGMENT_SHADER);
+    FinalizeShader();
 
-void CSkyBoxShader::Init(char* vertex_shader, char* fragment_shader)
-{
-	InitShaderProgram(vertex_shader, fragment_shader);
-	Start();
-	GetAllUniformLocations();
-	ConnectTextureUnits();
-	Stop();
-	m_Rotation = 0.f;
-	m_RotationSpeed = 0.1f;
+    Start();
+    GetAllUniformLocations();
+    ConnectTextureUnits();
+    Stop();
+    m_Rotation = 0.f;
+    m_RotationSpeed = 0.1f;
 }
 
 void CSkyBoxShader::LoadProjectionMatrix(const glm::mat4& matrix) const

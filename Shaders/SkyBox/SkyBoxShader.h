@@ -5,7 +5,6 @@ class CSkyBoxShader : public CShaderProgram
 {
 public:
 	void Init();
-	void Init(char* vertex_shader, char* fragment_shader);
 	void LoadProjectionMatrix(const glm::mat4& matrix) const;
 	void LoadViewMatrix(glm::mat4 matrix, const float& deltaTime, const float& distance_view);
 

@@ -8,17 +8,19 @@ CTextureLoader::CTextureLoader(std::vector<std::unique_ptr<CTexture>>& textures_
 
 void CTextureLoader::ReadFile(const std::string & file, SImage& image, TextureFlip::Type flip_mode)
 {
+    Log("Read file: " + file);
+
 	FREE_IMAGE_FORMAT formato = FreeImage_GetFileType(file.c_str(), 0);
 	if (formato == FIF_UNKNOWN)
 	{
-		Log("[Error] wrong image format or file does not exist." + file);
+        Log("[Error] GetFileType: wrong image format or file does not exist : " + file);
 		return;
 	}
 
 	FIBITMAP* imagen2 = FreeImage_Load(formato, file.c_str());
 	if (!imagen2)
 	{
-		Log("[Error] wrong image format or file does not exist." + file);
+        Log("[Error] FreeImageLoad: wrong image format or file does not exist : " + file);
 		return;
 	}
 
@@ -54,24 +56,27 @@ void CTextureLoader::ReadFile(const std::string & file, SImage& image, TextureFl
 	}
 	FreeImage_Unload(imagen);
 	FreeImage_Unload(imagen2);
+    Log("File: " + file + " is loaded.");
 }
 
 CTexture* CTextureLoader::LoadTexture(const std::string & file, bool opengl_pass, TextureType::Type type, TextureFlip::Type flip_mode)
 {
-	unsigned int id = 0;
 	for (auto& t : m_Textures)
 	{
-		if (t->GetFileName().compare(file) == 0)
-			return t.get();
-		id++;
+        if (t->GetFileName() == file)
+        {
+            Log("Texture found in texutre list. : " + file);
+            return t.get();
+        }
+
 	}
-	SImage texture;
+	SImage texture; 
 	ReadFile(file, texture, flip_mode);
 
 	switch (type)
 	{
 	case TextureType::MATERIAL:
-		m_Textures.push_back(std::make_unique<CMaterialTexture>(false, file, file, texture));
+         m_Textures.emplace_back(new CMaterialTexture(false, file, file, texture));
 		break;
 	}
 	if(opengl_pass)

@@ -9,6 +9,7 @@ CEntityRenderer::CEntityRenderer(SProjection* projection_matrix, std::weak_ptr<C
 
 void CEntityRenderer::Init()
 {
+    Log("Start initialize entity renderer...");
 	m_Shader.Init();
 	m_Shader.Start();
 	assert(m_ProjectionMatrix != nullptr);
@@ -122,6 +123,6 @@ void CEntityRenderer::BindMaterial(const SMaterial & material) const
 
 void CEntityRenderer::UnBindMaterial(const SMaterial & material) const
 {
-	if (material.isTransparency)
-		Utils::EnableCulling();
+    if (material.isTransparency)
+        Utils::EnableCulling();
 }

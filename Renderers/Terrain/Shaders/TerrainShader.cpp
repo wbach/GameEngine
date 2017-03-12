@@ -6,12 +6,12 @@ void CTerrainShader::Init()
 	AddShader("../Shaders/Terrain/TerrainShader.vert", GL_VERTEX_SHADER);
 	AddShader("../Shaders/Terrain/TerrainShader.frag", GL_FRAGMENT_SHADER);
 	AddShader("../Shaders/Terrain/TerrainShader.cs", GL_TESS_CONTROL_SHADER);
-	AddShader("../Shaders/Terrain/TerrainShader.es", GL_TESS_EVALUATION_SHADER);
+    AddShader("../Shaders/Terrain/TerrainShader.es", GL_TESS_EVALUATION_SHADER);
 	FinalizeShader();
 	
 	Start();
 	GetAllUniformLocations();
-	ConnectTextureUnits();
+    ConnectTextureUnits();
 	Stop();
 }
 
@@ -53,18 +53,18 @@ void CTerrainShader::BindAttributes()
 
 void CTerrainShader::ConnectTextureUnits()
 {
-	LoadValue(location_backgroundTexture, 0);
-	LoadValue(location_rTexture, 1);
-	LoadValue(location_gTexture, 2);
-	LoadValue(location_bTexture, 3);
-	LoadValue(location_blendMap, 4);
-	LoadValue(location_backgroundTextureNormal, 5);
-	LoadValue(location_rTextureNormal, 6);
-	LoadValue(location_gTextureNormal, 7);
-	LoadValue(location_bTextureNormal, 8);
-	LoadValue(location_RockTexture, 9);
-	LoadValue(location_RockTextureNormal, 10);
-	LoadValue(location_DisplacementMap, 11);
+    LoadValue(location_backgroundTexture, 0);
+    LoadValue(location_rTexture, 1);
+    LoadValue(location_gTexture, 2);
+    LoadValue(location_bTexture, 3);
+    LoadValue(location_blendMap, 4);
+    LoadValue(location_backgroundTextureNormal, 5);
+    LoadValue(location_rTextureNormal, 6);
+    LoadValue(location_gTextureNormal, 7);
+    LoadValue(location_bTextureNormal, 8);
+    LoadValue(location_RockTexture, 9);
+    LoadValue(location_RockTextureNormal, 10);
+    LoadValue(location_DisplacementMap, 11);
 }
 
 void CTerrainShader::LoadTransformMatrix(const glm::mat4 & matrix) const

@@ -15,6 +15,6 @@ CModel * CResourceManager::LoadModel(const std::string & file)
 	}
 	//CAssimModel  CMyModel
 	m_Models.push_back(std::make_unique<CMyModel>(m_TextureLoader));
-	m_Models.back()->InitModel(file);
+    m_Models.back()->InitModel(file);
 	return m_Models.back().get();
 }
