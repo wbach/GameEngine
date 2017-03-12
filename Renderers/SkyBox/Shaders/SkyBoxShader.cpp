@@ -3,8 +3,8 @@
 void CSkyBoxShader::Init()
 {
     CreateProgram();
-    AddShader("../Shaders/Light/SkyboxVertexShader.vert", GL_VERTEX_SHADER);
-    AddShader("../Shaders/Light/SkyboxFragmentShader.frag", GL_FRAGMENT_SHADER);
+    AddShader("../Shaders/SkyBox/SkyboxVertexShader.vert", GL_VERTEX_SHADER);
+    AddShader("../Shaders/SkyBox/SkyboxFragmentShader.frag", GL_FRAGMENT_SHADER);
     FinalizeShader();
 
     Start();

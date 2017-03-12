@@ -26,6 +26,11 @@ void CLightPassRenderer::PrepareFrame(CScene * scene)
 
 void CLightPassRenderer::Render(CScene * scene)
 {	
+	
+}
+
+void CLightPassRenderer::EndFrame(CScene * scene)
+{
 	glPolygonMode(GL_FRONT, GL_FILL);
 	glPolygonMode(GL_BACK, GL_FILL);
 	glDepthMask(GL_FALSE);
@@ -53,9 +58,4 @@ void CLightPassRenderer::Render(CScene * scene)
 	}
 	m_Quad.Render();
 	m_Shader.Stop();
-}
-
-void CLightPassRenderer::EndFrame(CScene * scene)
-{
-	
 }

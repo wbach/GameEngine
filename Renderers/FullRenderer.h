@@ -3,6 +3,7 @@
 #include "Entity/EntityRenderer.h"
 #include "Terrain/TerrainRenderer.h"
 #include "Framebuffer/DeferedFrameBuffer/DeferedFrameBuffer.h"
+#include "SkyBox/SkyBoxRenderer.h"
 #include "LightPassRenderer.h"
 
 class FullRenderer : public CRenderer

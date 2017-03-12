@@ -8,8 +8,6 @@ CTextureLoader::CTextureLoader(std::vector<std::unique_ptr<CTexture>>& textures_
 
 void CTextureLoader::ReadFile(const std::string & file, SImage& image, TextureFlip::Type flip_mode)
 {
-    Log("Read file: " + file);
-
 	FREE_IMAGE_FORMAT formato = FreeImage_GetFileType(file.c_str(), 0);
 	if (formato == FIF_UNKNOWN)
 	{
@@ -62,14 +60,9 @@ void CTextureLoader::ReadFile(const std::string & file, SImage& image, TextureFl
 CTexture* CTextureLoader::LoadTexture(const std::string & file, bool opengl_pass, TextureType::Type type, TextureFlip::Type flip_mode)
 {
 	for (auto& t : m_Textures)
-	{
         if (t->GetFileName() == file)
-        {
-            Log("Texture found in texutre list. : " + file);
             return t.get();
-        }
 
-	}
 	SImage texture; 
 	ReadFile(file, texture, flip_mode);
 
@@ -88,5 +81,26 @@ CTexture * CTextureLoader::LoadTextureImmediately(const std::string & file, Text
 {
 	auto texture = LoadTexture(file, false, type, flip_mode);
 	texture->OpenGLLoadingPass();
+	return texture;
+}
+
+CTexture * CTextureLoader::LoadCubeMap(std::vector<std::string>& files, bool opengl_pass)
+{
+	std::vector<SImage> images;
+	images.resize(6);
+
+	int x = 0;
+	for (const auto& file : files)
+	{
+		ReadFile(file, images[x++], TextureFlip::VERTICAL);
+	}
+
+	m_Textures.emplace_back(new CCubeMapTexture(files[0], images));
+
+	auto texture = m_Textures.back().get();
+
+	if(opengl_pass)
+		m_OpenGLLoader.AddObjectToOpenGLLoadingPass(texture);
+
 	return texture;
 }

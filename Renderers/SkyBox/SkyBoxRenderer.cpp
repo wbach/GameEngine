@@ -1,7 +1,9 @@
 #include "SkyBoxRenderer.h"
 
-CSkyBoxRenderer::CSkyBoxRenderer(CModel *model, SProjection *projection_matrix, std::weak_ptr<CFrameBuffer> framebuffer)
-    : m_Model(model)
+CSkyBoxRenderer::CSkyBoxRenderer(SProjection *projection_matrix, std::weak_ptr<CFrameBuffer> framebuffer)
+    : m_Model(nullptr)
+	, m_DayTexture(nullptr)
+	, m_NightTexture(nullptr)
     , m_ProjectionMatrix(projection_matrix)
     , CRenderer(framebuffer)
 {
@@ -16,12 +18,16 @@ void CSkyBoxRenderer::Init()
     m_Shader.LoadFogColour(.8f, .8f, .8f);
     m_Shader.LoadBlendFactor(1.f);
     m_Shader.Stop();
+	Log("Skybox renderer initialized.");
 }
 
 void CSkyBoxRenderer::PrepareFrame(CScene *scene)
 {
+	InitMembers(scene);
+
+	Utils::DisableCulling();
    m_Shader.Start();
-   m_Shader.LoadViewMatrix(scene->GetCamera()->GetViewMatrix(), 0.1f, 100.f);
+   m_Shader.LoadViewMatrix(scene->GetCamera()->GetViewMatrix(), 0.1f, 500.f);
 
    auto target = m_Target.lock();
    if (!target)
@@ -31,10 +37,12 @@ void CSkyBoxRenderer::PrepareFrame(CScene *scene)
 
    for(const auto& mesh : m_Model->GetMeshes())
    {
-
+	   Utils::EnableVao(mesh.GetVao(), mesh.GetUsedAttributes());
+	   BindTextures(mesh.GetMaterial());
        glDrawElements(GL_TRIANGLES, mesh.GetVertexCount(), GL_UNSIGNED_SHORT, 0);
+	   Utils::DisableVao(mesh.GetUsedAttributes());
    }
-
+   Utils::EnableCulling();
    m_Shader.Stop();
 }
 
@@ -51,4 +59,56 @@ void CSkyBoxRenderer::EndFrame(CScene *scene)
 void CSkyBoxRenderer::Subscribe(CGameObject *gameObject)
 {
 
+}
+
+void CSkyBoxRenderer::InitMembers(CScene* scene)
+{
+	if (m_Model == nullptr)
+	{
+		m_Model = scene->GetResourceManager().LoadModel("../Data/Meshes/SkyBox/cube.obj");
+		m_Model->OpenGLLoadingPass();
+	}
+	if (m_DayTexture == nullptr)
+	{
+		std::vector<std::string> dayTextures
+		{
+			"../Data/Skybox/TropicalSunnyDay/right.png",
+			"../Data/Skybox/TropicalSunnyDay/left.png",
+			"../Data/Skybox/TropicalSunnyDay/top.png",
+			"../Data/Skybox/TropicalSunnyDay/bottom.png",
+			"../Data/Skybox/TropicalSunnyDay/back.png",			
+			"../Data/Skybox/TropicalSunnyDay/front.png"			
+		};
+		m_DayTexture = scene->GetResourceManager().GetTextureLaoder().LoadCubeMap(dayTextures, false);
+		m_DayTexture->OpenGLLoadingPass();
+	}
+	if (m_NightTexture == nullptr)
+	{
+		std::vector<std::string> dayTextures
+		{
+			"../Data/Skybox/TropicalSunnyDay/right.png",
+			"../Data/Skybox/TropicalSunnyDay/left.png",
+			"../Data/Skybox/TropicalSunnyDay/top.png",
+			"../Data/Skybox/TropicalSunnyDay/bottom.png",
+			"../Data/Skybox/TropicalSunnyDay/back.png",
+			"../Data/Skybox/TropicalSunnyDay/front.png"
+		};
+		m_NightTexture = scene->GetResourceManager().GetTextureLaoder().LoadCubeMap(dayTextures, false);
+		m_NightTexture->OpenGLLoadingPass();
+	}
+}
+
+void CSkyBoxRenderer::BindTextures(const SMaterial & material) const
+{
+	if (m_DayTexture != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, m_DayTexture->GetId());
+	}
+
+	if (m_NightTexture != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, m_NightTexture->GetId());
+	}
 }
