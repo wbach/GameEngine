@@ -5,6 +5,7 @@
 #include "OpenGL/OpenGLUtils.h"
 #include "XML/XMLUtils.h"
 #include <fstream>
+#include "../Debug_/Log.h"
 
 #ifndef M_PI
 #define M_PI    3.14159265358979323846264338327950288   /* pi */
@@ -114,6 +115,8 @@ namespace Utils
 	static std::string ReadFile(const std::string& file_name)
 	{
 		std::ifstream t(file_name);
+		if (!t.is_open())
+			Error("Cannot open file : " + file_name);
 		return std::string((std::istreambuf_iterator<char>(t)),
 			std::istreambuf_iterator<char>());
 	}

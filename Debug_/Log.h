@@ -5,7 +5,7 @@
 #include <chrono>
 #include <iomanip>
 #include <sstream>
-
+#include "SDL2/SDL.h"
 class CLogger
 {
 public:
@@ -19,6 +19,11 @@ public:
 		enabled = true;
 		CreateLogFile();
 	}
+	void Error(const std::string& log)
+	{
+		MessageBox(SDL_MESSAGEBOX_ERROR, "Error", log.c_str());
+		Log(log);
+	}
 	void Log(const std::string& log)
 	{
 		if (!enabled)
@@ -28,6 +33,13 @@ public:
 		std::ofstream file(m_FileName, std::ios_base::app);
 		file << log << '\n';
 		file.close();
+	}
+	void MessageBox(Uint32 flags, const std::string& title, const std::string& message)
+	{
+		SDL_ShowSimpleMessageBox(flags,
+			title.c_str(),
+			message.c_str(),
+			NULL);
 	}
 	void SaveToFile() const
 	{
@@ -41,8 +53,9 @@ public:
 	}
 private:
 	CLogger()
-	{		
-	}
+	{
+		
+	}	
 
 	void CreateLogFile()
 	{
@@ -62,3 +75,4 @@ private:
 };
 
 #define Log(x) do {CLogger::Instance().Log(x);} while(0)
+#define Error(x) do {CLogger::Instance().Error(x);} while(0)

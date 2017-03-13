@@ -27,7 +27,7 @@ void CSkyBoxRenderer::PrepareFrame(CScene *scene)
 
 	Utils::DisableCulling();
    m_Shader.Start();
-   m_Shader.LoadViewMatrix(scene->GetCamera()->GetViewMatrix(), 0.1f, 500.f);
+   m_Shader.LoadViewMatrix(scene->GetCamera()->GetViewMatrix(), scene->GetDeltaTime(), 500.f);
 
    auto target = m_Target.lock();
    if (!target)

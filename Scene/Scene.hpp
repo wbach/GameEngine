@@ -39,6 +39,8 @@ public:
 
 	//Resources
 	CResourceManager& GetResourceManager() { return m_ResourceManager; }
+
+	float GetDeltaTime() { return m_DeltaTime; }
 protected:
 	//Minimum one light on scene only (night - decrease strength)
 	CLight				m_DirectionalLight;
@@ -49,4 +51,6 @@ protected:
     std::unique_ptr<CCamera> m_Camera;
 
 	CResourceManager m_ResourceManager;
+
+	float m_DeltaTime = 0;
 };

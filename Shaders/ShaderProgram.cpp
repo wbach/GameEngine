@@ -17,7 +17,7 @@ bool CShaderProgram::CreateProgram()
 	m_ProgramID = glCreateProgram();
 	if (m_ProgramID == 0)
 	{
-		Log("[Error] Error creating shader program.");
+		Error("[Error] Error creating shader program.");
 		return false;
 	}
 	return true;
@@ -32,7 +32,7 @@ bool CShaderProgram::AddShader(const std::string& filename, GLenum mode)
 
 	if (id == 0)
 	{
-		Log("[Error] Error creating shader type " + mode);
+		Error("[Error] Error creating shader type " + mode);
 		return false;
 	}
 
@@ -57,8 +57,6 @@ bool CShaderProgram::AddShader(const std::string& filename, GLenum mode)
 	}
 	if (id == GL_FALSE)
 	{
-		system("pause");
-		exit(0);
 	}
 	glAttachShader(m_ProgramID, id);
 
@@ -78,7 +76,7 @@ bool CShaderProgram::FinalizeShader()
 	if (Success == 0)
 	{
 		glGetProgramInfoLog(m_ProgramID, sizeof(ErrorLog), NULL, ErrorLog);
-		Log("[Error] Error linking shader program: " + std::string(ErrorLog));
+		Error("[Error] Error linking shader program: " + std::string(ErrorLog));
 		return false;
 	}
 
@@ -88,7 +86,7 @@ bool CShaderProgram::FinalizeShader()
 	if (!Success)
 	{
 		glGetProgramInfoLog(m_ProgramID, sizeof(ErrorLog), NULL, ErrorLog);
-		Log("[Error] Invalid shader program : " + std::string(ErrorLog));
+		Error("[Error] Invalid shader program : " + std::string(ErrorLog));
 		return false;
 	}
 
@@ -99,7 +97,7 @@ bool CShaderProgram::FinalizeShader()
 
 	if (glGetError() != GL_NO_ERROR)
 	{
-		Log("[Error] Invalid shader program.");
+		Error("[Error] Invalid shader program.");
 		return false;
 	}
 	return true;

@@ -3,9 +3,9 @@
 void CGrassShader::Init()
 {
     CreateProgram();
-    AddShader("../Shaders/Light/GrassShader.vert", GL_VERTEX_SHADER);
-    AddShader("../Shaders/Light/GrassShader.frag", GL_FRAGMENT_SHADER);
-    AddShader("../Shaders/Light/GrassShader.geom", GL_GEOMETRY_SHADER);
+    AddShader("../Shaders/Grass/GrassShader.vert", GL_VERTEX_SHADER);
+    AddShader("../Shaders/Grass/GrassShader.frag", GL_FRAGMENT_SHADER);
+    AddShader("../Shaders/Grass/GrassShader.geom", GL_GEOMETRY_SHADER);
     FinalizeShader();
 
 	Start();

@@ -86,14 +86,18 @@ CTexture * CTextureLoader::LoadTextureImmediately(const std::string & file, Text
 
 CTexture * CTextureLoader::LoadCubeMap(std::vector<std::string>& files, bool opengl_pass)
 {
+	if (files.size() != 6)
+	{
+		Log("Cube map texture need 6 texutres.");
+		return nullptr;
+	}
+
 	std::vector<SImage> images;
 	images.resize(6);
 
 	int x = 0;
 	for (const auto& file : files)
-	{
 		ReadFile(file, images[x++], TextureFlip::VERTICAL);
-	}
 
 	m_Textures.emplace_back(new CCubeMapTexture(files[0], images));
 
