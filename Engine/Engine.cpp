@@ -148,6 +148,11 @@ void CEngine::Init()
 {
 	glEnable(GL_DEPTH_TEST);
 
+	//if (m_Renderer == nullptr)
+	//{
+	//	Error("Main Renderer not set!");
+	//		exit(-1);
+	//}
 	m_Renderer = std::make_unique<FullRenderer>(&m_Projection);
 
 	m_Renderer->Init();

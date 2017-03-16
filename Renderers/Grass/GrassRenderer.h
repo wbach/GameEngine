@@ -1,6 +1,7 @@
 #pragma once
 #include "../Renderer.h"
 #include "Shaders/GrassShader.h"
+#include "../../Objects/RenderAble/Grass.h"
 
 class CGrassRenderer : public CRenderer
 {
@@ -14,10 +15,6 @@ public:
 private:
 	CGrassShader m_Shader;
 	SProjection* m_Projection;
-	CTexture* m_Texture;
 
-	GLuint m_MeshVao;
-	GLuint m_VertexVbo;
-	GLuint m_VertexSize;
-	std::vector<float> grassvertex;
+	std::list<CGrass*> m_Subscribes;
 };

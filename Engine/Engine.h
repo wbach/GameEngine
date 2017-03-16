@@ -23,14 +23,14 @@ public:
 	void SetIsLoading(bool is);
 	bool GetIsLoading();
 
+	SProjection m_Projection;
 	CDisplayManager m_DisplayManager;
 	CInputManager	m_InputManager;
 	std::unique_ptr<CScene> m_Scene;
 	std::unique_ptr<CRenderer> m_Renderer;
 private:	
 	std::unique_ptr<CLoadingScreenRenderer> m_LoadingScreenRenderer;	
-
-	SProjection m_Projection;
+	
 	//Global items, loading screen etc...
 	CResourceManager m_ResorceManager;
 

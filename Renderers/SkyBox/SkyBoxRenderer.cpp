@@ -28,6 +28,7 @@ void CSkyBoxRenderer::PrepareFrame(CScene *scene)
 	Utils::DisableCulling();
    m_Shader.Start();
    m_Shader.LoadViewMatrix(scene->GetCamera()->GetViewMatrix(), scene->GetDeltaTime(), 500.f);
+   m_Shader.LoadBlendFactor(scene->GetDayNightCycle().GetDayNightBlendFactor());
 
    auto target = m_Target.lock();
    if (!target)
@@ -84,16 +85,16 @@ void CSkyBoxRenderer::InitMembers(CScene* scene)
 	}
 	if (m_NightTexture == nullptr)
 	{
-		std::vector<std::string> dayTextures
+		std::vector<std::string> nightTextures
 		{
-			"../Data/Skybox/TropicalSunnyDay/right.png",
-			"../Data/Skybox/TropicalSunnyDay/left.png",
-			"../Data/Skybox/TropicalSunnyDay/top.png",
-			"../Data/Skybox/TropicalSunnyDay/bottom.png",
-			"../Data/Skybox/TropicalSunnyDay/back.png",
-			"../Data/Skybox/TropicalSunnyDay/front.png"
+			"../Data/Skybox/Night/right.png",
+			"../Data/Skybox/Night/left.png",
+			"../Data/Skybox/Night/top.png",
+			"../Data/Skybox/Night/bottom.png",
+			"../Data/Skybox/Night/back.png",
+			"../Data/Skybox/Night/front.png"
 		};
-		m_NightTexture = scene->GetResourceManager().GetTextureLaoder().LoadCubeMap(dayTextures, false);
+		m_NightTexture = scene->GetResourceManager().GetTextureLaoder().LoadCubeMap(nightTextures, false);
 		m_NightTexture->OpenGLLoadingPass();
 	}
 }

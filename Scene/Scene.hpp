@@ -5,6 +5,7 @@
 #include "../Objects/RenderAble/Entity.h"
 #include "../Objects/RenderAble/Terrain.h"
 #include "../Resources/ResourceManager.h"
+#include "../Time/DayNightCycle.h"
 #include <vector>
 #include <list>
 
@@ -36,14 +37,18 @@ public:
 	//Lights
 	const CLight& GetDirectionalLight() const;
 	const std::vector<CLight>&	GetLights() const;
+	const CDayNightCycle& GetDayNightCycle() const { return m_DayNightCycle; }
 
 	//Resources
 	CResourceManager& GetResourceManager() { return m_ResourceManager; }
 
 	float GetDeltaTime() { return m_DeltaTime; }
+	float GetGlobalTime() { return m_GloabalTime; }
 protected:
 	//Minimum one light on scene only (night - decrease strength)
+	CDayNightCycle		m_DayNightCycle;
 	CLight				m_DirectionalLight;
+
 	std::vector<CLight>	m_Lights;
 
     std::list<std::unique_ptr<CGameObject>>  m_GameObjects;
@@ -53,4 +58,5 @@ protected:
 	CResourceManager m_ResourceManager;
 
 	float m_DeltaTime = 0;
+	float m_GloabalTime = 0.f;
 };

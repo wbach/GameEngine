@@ -70,7 +70,7 @@ void CTerrain::LoadHeight(SImage& height_map)
 
 	
 	//bgr2rgb
-	for (int j = 0; j<w*h; j++)
+	for (unsigned int j = 0; j<w*h; j++)
 	{
 		float r = static_cast<float>(height_map.m_Data[j * 4 + 0]);
 		float g = static_cast<float>(height_map.m_Data[j *4 + 1]);
@@ -85,14 +85,13 @@ void CTerrain::LoadHeight(SImage& height_map)
 		m_Heights[j] = height;
 	}
 
-
 	/*for (unsigned int y = 0; y < h; y++)
 	{
+			i *= 2.f;
 		for (unsigned int x = 0; x < w; x++)
 		{
 			float i = static_cast<float>(height_map.m_Data[x + h*y]);
 			i /= 255.f;
-			i *= 2.f;
 			i -= 1.f;
 			SetHeight(x, y, i);
 		}

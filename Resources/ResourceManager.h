@@ -13,6 +13,7 @@ class CResourceManager
 public:
 	CResourceManager();
 	CModel* LoadModel(const std::string& file);
+	void AddModel(CModel * model) { m_Models.emplace_back(model); m_OpenGlLoader.AddObjectToOpenGLLoadingPass(model); }
 	CModel* GetModel(unsigned int id) { return m_Models[id].get(); }
 	COpenGLLoader& GetOpenGlLoader() { return m_OpenGlLoader; }
 	CTextureLoader& GetTextureLaoder() { return m_TextureLoader; }
