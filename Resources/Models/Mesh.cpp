@@ -21,7 +21,7 @@ CMesh::CMesh(
 	m_Tangents	 = std::move(tangents);
 	m_Bones		 = std::move(bones);
 	m_Material	 = material;	
-	m_VertexCount = m_Indices.size();
+    m_VertexCount = m_Indices.size() > 0 ? m_Indices.size() : m_Positions.size() / 3;
 
 	if (!m_Positions.empty())	m_Attributes.push_back(0);
 	if (!m_TextCoords.empty())	m_Attributes.push_back(1);
@@ -35,15 +35,21 @@ CMesh::~CMesh()
 {
 	if (!m_IsInit) return;
 
-	glDeleteBuffers(1, &m_Vbos[VertexBufferObjects::INDICES]);
-	glDeleteBuffers(1, &m_Vbos[VertexBufferObjects::POSITION]);
-	glDeleteBuffers(1, &m_Vbos[VertexBufferObjects::TEXT_COORD]);
-	glDeleteBuffers(1, &m_Vbos[VertexBufferObjects::NORMAL]);
-	glDeleteBuffers(1, &m_Vbos[VertexBufferObjects::TANGENT]);
-	if (m_TransformVboCreated)
-		glDeleteBuffers(1, &m_Vbos[VertexBufferObjects::TRANSFORM_MATRIX]);
-	if (m_BonesInShader)
-		glDeleteBuffers(1, &m_Vbos[VertexBufferObjects::BONES]);
+    for(auto& vbo : m_Vbos)
+    {
+        if(vbo != 0)
+        glDeleteBuffers(1, &vbo);
+    }
+/*
+    glDeleteBuffers(1, &m_Vbos[VertexBufferObjects::POSITION]);
+    glDeleteBuffers(1, &m_Vbos[VertexBufferObjects::TEXT_COORD]);
+    glDeleteBuffers(1, &m_Vbos[VertexBufferObjects::NORMAL]);
+    glDeleteBuffers(1, &m_Vbos[VertexBufferObjects::TANGENT]);
+    if (m_TransformVboCreated)
+        glDeleteBuffers(1, &m_Vbos[VertexBufferObjects::TRANSFORM_MATRIX]);
+    if (m_BonesInShader)
+        glDeleteBuffers(1, &m_Vbos[VertexBufferObjects::BONES]);
+*/
 	//glDeleteBuffers(VertexBufferObjects::COUNT, m_Vbos);
 	glDeleteVertexArrays(1, &m_Vao);
 	m_IsInit = false;
@@ -63,7 +69,12 @@ void CMesh::CreateVaoMesh()
 {
 	m_Vao = Utils::CreateVao();
 
-	GLuint vboId = Utils::BindIndicesBuffer(m_Indices); m_Vbos[VertexBufferObjects::INDICES] = vboId;
+    if (m_Indices.size() > 0)
+    {
+        GLuint vboId = Utils::BindIndicesBuffer(m_Indices);
+        m_Vbos[VertexBufferObjects::INDICES] = vboId;
+    }
+
 	if (m_Positions.size() > 0)
 	{
 		GLuint vboId = Utils::StoreDataInAttributesList(0, 3, m_Positions);

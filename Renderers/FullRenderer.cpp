@@ -10,7 +10,7 @@ FullRenderer::FullRenderer(SProjection* projection_matrix)
 	, m_DefferedFrameBuffer(new CDefferedFrameBuffer())
 {
 	m_Renderers.emplace_back(new CLightPassRenderer(projection_matrix, m_DefferedFrameBuffer));
-	m_Renderers.emplace_back(new CGrassRenderer(projection_matrix, m_DefferedFrameBuffer));
+    m_Renderers.emplace_back(new CGrassRenderer(projection_matrix, m_DefferedFrameBuffer));
 	m_Renderers.emplace_back(new CSkyBoxRenderer(projection_matrix, m_DefferedFrameBuffer));
     m_Renderers.emplace_back(new CTerrainRenderer(projection_matrix, m_DefferedFrameBuffer));
 	m_Renderers.emplace_back(new CEntityRenderer(projection_matrix, m_DefferedFrameBuffer));	

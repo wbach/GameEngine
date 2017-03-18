@@ -25,7 +25,7 @@ void CDayNightCycle::Update(const float & delta_time)
 	CGameTime::Update(delta_time);
 	CalculateBlendFactor();
 	UpdateSunColor();
-	UpdateSunPosition();
+    UpdateSunPosition();
 }
 
 void CDayNightCycle::UpdateSunColor()
@@ -90,7 +90,7 @@ void CDayNightCycle::UpdateSunPosition()
 	float m_SunAngle = m_CurrentTime * 360.f;
 	float rad = (m_SunAngle)*static_cast<float>(M_PI) / 180.0f + M_PI / 2.f;
 	current_pos.x = m_DefaultSunPos.x * cos(rad);
-	current_pos.y = m_DefaultSunPos.y * abs(cos(rad / 2.f)) + 1000.f;
+    current_pos.y = m_DefaultSunPos.y * fabs(cos(rad / 2.f)) + 1000.f;
 	current_pos.z = m_DefaultSunPos.z *  sin(rad);
 	m_DirectionalLight->SetPosition(current_pos);
 	//Utils::PrintVector("", current_pos);
@@ -127,6 +127,7 @@ void CDayNightCycle::CalculateBlendFactor()
 
 void CDayNightCycle::SetDirectionalLight(CLight * light)
 {
+    m_DefaultSunPos = light->GetPosition();
 	m_DirectionalLight = light;
 }
 

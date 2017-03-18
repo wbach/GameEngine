@@ -31,7 +31,7 @@ void CGrassRenderer::Render(CScene * scene)
 	m_Shader.LoadGlobalTime(scene->GetGlobalTime());
 	m_Shader.LoadShadowValues(0.f, 0.f, 512.f);
 	m_Shader.LoadViewMatrix(scene->GetCamera()->GetViewMatrix());
-	m_Shader.LoadViewDistance(1000.f);
+    m_Shader.LoadViewDistance(30.f);
 
 	Utils::DisableCulling();
 

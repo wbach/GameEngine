@@ -31,9 +31,9 @@ CMesh * CModel::AddMesh(std::vector<float>& positions, std::vector<float>& text_
 		f << i << "\n";
 	}
 	f.close();*/
-	CMesh mesh(positions, text_coords, normals, tangents, indices, material, bones);
+    //CMesh mesh(positions, text_coords, normals, tangents, indices, material, bones);
 	// Normalize to define scale (height) 1 unit = 1 metr
-	m_Meshes.push_back(std::move(mesh));
+    m_Meshes.emplace_back(positions, text_coords, normals, tangents, indices, material, bones);
 	CalculateBoudnigBox();
 	return &m_Meshes.back();
 }
