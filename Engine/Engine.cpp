@@ -1,10 +1,11 @@
 #include "Engine.h"
 
-CEngine::CEngine(const std::string & window_name, const int & w, const int & h, bool full_screen)
-	: m_DisplayManager(window_name, w, h, full_screen)
-	, m_Projection({w, h})
+CEngine::CEngine()
+    : m_DisplayManager("window_name", 1000, 600, 0)
+    , m_Projection({1000, 600})
 {
 	m_DisplayManager.SetInput(m_InputManager.m_Input);
+    ReadConfiguration("../Data/Conf.ini");
 }
 
 void CEngine::GameLoop()
@@ -121,9 +122,10 @@ int CEngine::ReadConfiguration(const std::string & file_name)
 		std::string var = line.substr(0, line.find_last_of("="));
 		std::string value = line.substr(line.find_last_of("=") + 1);
 
-		/*	if (var.compare("Name") == 0)				m_WindowName = value;
-		if (var.compare("Resolution") == 0)			m_WindowSize = Get::Vector2d(value);
-		if (var.compare("FullScreen") == 0)			m_IsFullScreen = Get::Boolean(value);
+        /*
+        if (var.compare("Name") == 0)				m_Configuration.m_WindowName = value;
+        if (var.compare("Resolution") == 0)			m_Configuration.m_WindowSize = Get::Vector2d(value);
+        if (var.compare("FullScreen") == 0)			m_Configuration.m_FullScreen = Get::Boolean(value);
 		if (var.compare("RefreshRate") == 0)		m_RefreshRate = Get::Int(value);
 		if (var.compare("Sound") == 0)				m_IsSound = Get::Boolean(value);
 		if (var.compare("SoundVolume") == 0)		m_SoundVolume = Get::Float(value);
@@ -137,7 +139,7 @@ int CEngine::ReadConfiguration(const std::string & file_name)
 		if (var.compare("ShadowMapSize") == 0)		m_ShadowMapSize = Get::Float(value);
 		if (var.compare("ViewDistance") == 0)		m_ViewDistance = Get::Float(value);
 		if (var.compare("GrassViewDistance") == 0)	m_GrassViewDistance = Get::Float(value);
-		if (var.compare("SimpleRender") == 0)		m_UsingSimpleRender = Get::Boolean(value);*/
+        if (var.compare("SimpleRender") == 0)		m_UsingSimpleRender = Get::Boolean(value); //*/
 
 	}
 	file.close();

@@ -115,10 +115,15 @@ namespace Utils
 	static std::string ReadFile(const std::string& file_name)
 	{
 		std::ifstream t(file_name);
-		if (!t.is_open())
-			Error("Cannot open file : " + file_name);
-		return std::string((std::istreambuf_iterator<char>(t)),
-			std::istreambuf_iterator<char>());
+        if (!t.is_open())
+        {
+            std::cout << ("Cannot open file : " + file_name) << std::endl;
+            return std::string();
+        }
+        std::string out = std::string((std::istreambuf_iterator<char>(t)),
+            std::istreambuf_iterator<char>());
+        t.close();
+        return out;
 	}
 	static void GetFileAndPath(const std::string& full, std::string& filename, std::string& path)
 	{

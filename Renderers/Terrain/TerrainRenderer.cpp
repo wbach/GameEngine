@@ -62,7 +62,6 @@ void CTerrainRenderer::Render(CScene * scene)
 				Utils::DisableVao(m.GetUsedAttributes());
 			}				
 		}
-		//sub->Render();
 	}
 	m_Shader.Stop();
 }

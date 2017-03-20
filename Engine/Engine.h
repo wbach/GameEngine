@@ -9,11 +9,12 @@
 #include "../Resources/ResourceManager.h"
 #include "../Renderers/SimpleRenderer.h"
 #include "../Debug_/Log.h"
+#include "Configuration.h"
 
 class CEngine
 {
 public:
-	CEngine(const std::string& window_name, const int& w, const int& h, bool full_screen);
+    CEngine();
 	int  ReadConfiguration(const std::string& file_name);
 	void Init();
 	void GameLoop();
@@ -23,6 +24,7 @@ public:
 	void SetIsLoading(bool is);
 	bool GetIsLoading();
 
+    SConfiguration m_Configuration;
 	SProjection m_Projection;
 	CDisplayManager m_DisplayManager;
 	CInputManager	m_InputManager;
@@ -35,5 +37,5 @@ private:
 	CResourceManager m_ResorceManager;
 
 	bool m_IsLoading;
-	std::mutex m_LoadingMutex;
+	std::mutex m_LoadingMutex;    
 };
