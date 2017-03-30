@@ -1,5 +1,5 @@
 #include "XMLUtils.h"
-#include "rapidxml-1.13/rapidxml_print.hpp"
+//#include "rapidxml-1.13/rapidxml_print.hpp"
 #include <sstream>
 
 void Utils::AddVectorToNode(rapidxml::xml_document<>& document, rapidxml::xml_node<>* node, const glm::vec3 vector)
@@ -35,7 +35,7 @@ std::string Utils::MessageBuilder(std::multimap<std::string, std::string>& messe
 	document.append_node(node);
 
 	std::stringstream ss;
-	ss << document;
+    //ss << document;
 	document.clear();
 	return ss.str();
 }

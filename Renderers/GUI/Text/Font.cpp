@@ -4,7 +4,6 @@
 CFont::~CFont()
 {
 	if (!m_IsInit) return;
-	std::cout << "Destructor " << typeid(*this).name() << std::endl;
 	Utils::DeleteQuad(m_QuadVao, m_QuadIndices, m_QuadVertex, m_QuadTexCoord);
 	for (SCharacter& character : m_Characters)
 	{
