@@ -28,7 +28,7 @@ class CFont
 public:
 	~CFont();
 	void Init(const std::string& file_name, const wb::vec2i& window_size);
-	void Print(const int& x, const int& y, const char *fmt) const;
+	void Print(const int& x, const int& y, const std::string& fmt) const;
 private:
 	void CreateList(FT_Face face, char ch);
 

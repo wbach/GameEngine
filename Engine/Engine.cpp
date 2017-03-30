@@ -6,7 +6,7 @@
 #include <fstream>
 
 CEngine::CEngine()
-    : m_DisplayManager("window_name", 1366, 768, 0)
+    : m_DisplayManager("window_name", 1000, 600, 0)
     , m_Projection({1000, 600})
 {
 	m_DisplayManager.SetInput(m_InputManager.m_Input);

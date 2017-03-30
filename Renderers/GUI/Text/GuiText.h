@@ -2,6 +2,7 @@
 #include "../GuiElement.h"
 #include "FontShader.h"
 #include "Font.h"
+#include "../../GameEngine/Debug_/Log.h"
 #include "GuiTextElement.h"
 #include <map>
 
@@ -19,7 +20,8 @@ public:
 	virtual void Init() override
 	{
 		m_Font.Init(m_FontFile, m_WindowSize);
-		m_Shader.Init();
+		m_Shader.Init();		
+		Log("CGuiText (GuiRenderer) is initialized.");
 	}
 	virtual void Render() override
 	{
