@@ -1,13 +1,13 @@
 #include "DayNightCycle.h"
+#include "../Utils/GLM/GLMUtils.h"
+#include "../Debug_/Log.h"
+#include <GL/glew.h>
 
 CDayNightCycle::CDayNightCycle()
 	: m_DirectionalLight(nullptr)
 	, m_SunRiseColor(Utils::RGBtoFloat(253.f, 168.f, 87.f))
 	, m_MidDayColor(1.f, 0.784314f, 0.588235)
 	, m_SunSetColor(Utils::RGBtoFloat(253.f, 94.f, 83.f))
-	//, m_SunRiseColor(Utils::RGBtoFloat(255, 0, 0))
-	//, m_MidDayColor(Utils::RGBtoFloat(0, 255, 0))
-	//, m_SunSetColor(Utils::RGBtoFloat(0, 0, 255))
 	, m_NightColor(glm::vec3(.01f))
 	, m_DayNightBlendFactor(0.5f)
 	, m_DayStart(.45f)
@@ -88,7 +88,7 @@ void CDayNightCycle::UpdateSunPosition()
 	glm::vec3 current_pos = m_DirectionalLight->GetPosition();
 
 	float m_SunAngle = m_CurrentTime * 360.f;
-	float rad = (m_SunAngle)*static_cast<float>(M_PI) / 180.0f + M_PI / 2.f;
+	float rad = (m_SunAngle)*static_cast<float>(M_PI) / 180.0f + static_cast<float>(M_PI) / 2.f;
 	current_pos.x = m_DefaultSunPos.x * cos(rad);
     current_pos.y = m_DefaultSunPos.y * fabs(cos(rad / 2.f)) + 1000.f;
 	current_pos.z = m_DefaultSunPos.z *  sin(rad);

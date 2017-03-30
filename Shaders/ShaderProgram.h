@@ -30,13 +30,13 @@ public:
 protected:
 	virtual void GetAllUniformLocations() {}
 	virtual void BindAttributes() {}
-	void LoadValue(unsigned int loacation, const int& value) const;
-	void LoadValue(unsigned int loacation, const float& value) const;
-	void LoadValue(unsigned int loacation, const glm::vec2& value) const;
-	void LoadValue(unsigned int loacation, const glm::vec3& value) const;
-	void LoadValue(unsigned int loacation, const glm::vec4& value) const;
-	void LoadValue(unsigned int loacation, const glm::mat3& value) const;
-	void LoadValue(unsigned int loacation, const glm::mat4& value) const;
+	void LoadValue(uint loacation, const int& value) const;
+	void LoadValue(uint loacation, const float& value) const;
+	void LoadValue(uint loacation, const glm::vec2& value) const;
+	void LoadValue(uint loacation, const glm::vec3& value) const;
+	void LoadValue(uint loacation, const glm::vec4& value) const;
+	void LoadValue(uint loacation, const glm::mat3& value) const;
+	void LoadValue(uint loacation, const glm::mat4& value) const;
 private:
 	int m_ProgramID = 0;
 	std::list<GLuint> m_ShaderObjectsList;

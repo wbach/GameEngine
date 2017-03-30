@@ -2,7 +2,6 @@
 #include "Mesh.h"
 #include <list>
 #include "../OpenGLObject.h"
-#include "../../Debug_/Log.h"
 
 class CModel : public COpenGLObject
 {
@@ -14,15 +13,16 @@ public:
 
 	virtual ~CModel();
 	virtual void Update(float dt) {};	
-	virtual const std::vector<glm::mat4>* GetBonesTransforms(unsigned int mesh_id) { return nullptr; }
-	virtual void AddCurrentFramePtr(unsigned int* ptr) { m_CurrentFrames.push_back(ptr); }
-	virtual void SetCurrentFrame(unsigned int& current_frame) {}
+	virtual const std::vector<glm::mat4>* GetBonesTransforms(uint mesh_id) { return nullptr; }
+	virtual void AddCurrentFramePtr(uint* ptr) { m_CurrentFrames.push_back(ptr); }
+	virtual void SetCurrentFrame(uint& current_frame) {}
 	virtual void SetTime(const float& time) {}
 
 	void OpenGLLoadingPass();
 	CMesh* AddMesh(std::vector<float>& positions, std::vector<float>& text_coords, std::vector<float>& normals, std::vector<float>& tangents,
 		std::vector<unsigned short>& indices, SMaterial& material, std::vector<SVertexBoneData>& bones);
 	const std::list<CMesh>& GetMeshes() const {return m_Meshes;	}
+	void SetMaterial(const SMaterial& material, uint mesh = 0);
 	glm::vec3 GetNormalizedScaleVector(float x, float y, float z) const;
 	void	CalculateBoudnigBox();
 
@@ -37,8 +37,8 @@ protected:
 	BoundingBox m_BoundingBox;
 
 	//One model in memory for all entities, so we need have time from outside to update (each entity can have diffrent animation progress)
-	std::list<unsigned int*> m_CurrentFrames;
+	std::list<uint*> m_CurrentFrames;
 
-    unsigned int m_Id = 0;
-    static unsigned int s_Id;
+    uint m_Id = 0;
+    static uint s_Id;
 };

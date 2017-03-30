@@ -23,7 +23,6 @@ public:
 	glm::mat4* GetProjectionMatrixPtr() { return &m_ProjectionMatrix; }
 	const wb::vec2i& GetWindowSize() {return m_WindowSize;}
 	float GetViewDistance() { return 0.8f * m_FarPlane; }
-private:
 	void CreateProjectionMatrix()
 	{
 		float aspect_ratio = (float)m_WindowSize.x / (float)m_WindowSize.y;
@@ -37,7 +36,17 @@ private:
 		m_ProjectionMatrix[2][3] = -1;
 		m_ProjectionMatrix[3][2] = -((2 * m_NearPlane * m_FarPlane) / frustum_length);
 		m_ProjectionMatrix[3][3] = 0;
-	}	
+	}
+	void OrthographicProjection()
+	{
+		float length = 100.f;
+		m_ProjectionMatrix = glm::mat4(1.f);
+		m_ProjectionMatrix[0][0] = 2.f / m_WindowSize.x;
+		m_ProjectionMatrix[1][1] = 2.f / m_WindowSize.y;
+		m_ProjectionMatrix[2][2] = -2.f / length;
+		m_ProjectionMatrix[3][3] = 1.f;
+	}
+private:	
 	float m_NearPlane;
 	float m_FarPlane;
 	float m_Fov;

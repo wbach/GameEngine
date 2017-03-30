@@ -1,4 +1,6 @@
 #include "Mesh.h"
+#include "../../Utils/GLM/GLMUtils.h"
+#include "../../Utils/OpenGL/OpenGLUtils.h"
 
 CMesh::CMesh()
 {
@@ -40,17 +42,6 @@ CMesh::~CMesh()
         if(vbo != 0)
         glDeleteBuffers(1, &vbo);
     }
-/*
-    glDeleteBuffers(1, &m_Vbos[VertexBufferObjects::POSITION]);
-    glDeleteBuffers(1, &m_Vbos[VertexBufferObjects::TEXT_COORD]);
-    glDeleteBuffers(1, &m_Vbos[VertexBufferObjects::NORMAL]);
-    glDeleteBuffers(1, &m_Vbos[VertexBufferObjects::TANGENT]);
-    if (m_TransformVboCreated)
-        glDeleteBuffers(1, &m_Vbos[VertexBufferObjects::TRANSFORM_MATRIX]);
-    if (m_BonesInShader)
-        glDeleteBuffers(1, &m_Vbos[VertexBufferObjects::BONES]);
-*/
-	//glDeleteBuffers(VertexBufferObjects::COUNT, m_Vbos);
 	glDeleteVertexArrays(1, &m_Vao);
 	m_IsInit = false;
 }
@@ -105,7 +96,7 @@ void CMesh::CreateTransformsVbo(std::vector<glm::mat4>& m)
 	glGenBuffers(1, &m_Vbos[VertexBufferObjects::TRANSFORM_MATRIX]);
 	glBindBuffer(GL_ARRAY_BUFFER, m_Vbos[VertexBufferObjects::TRANSFORM_MATRIX]);
 
-	for (unsigned int i = 0; i < 4; i++)
+	for (uint i = 0; i < 4; i++)
 	{
 		glEnableVertexAttribArray(4 + i);
 		glVertexAttribPointer(4 + i, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (const GLvoid*)(sizeof(GLfloat) * i * 4));
@@ -123,7 +114,7 @@ void CMesh::UpdateTransformVbo(std::vector<glm::mat4>& m)
 	glBindVertexArray(m_Vao);
 	glGenBuffers(1, &m_Vbos[VertexBufferObjects::TRANSFORM_MATRIX]);
 	glBindBuffer(GL_ARRAY_BUFFER, m_Vbos[VertexBufferObjects::TRANSFORM_MATRIX]);
-	for (unsigned int i = 0; i < 4; i++)
+	for (uint i = 0; i < 4; i++)
 	{
 		glEnableVertexAttribArray(4 + i);
 		glVertexAttribPointer(4 + i, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (const GLvoid*)(sizeof(GLfloat) * i * 4));

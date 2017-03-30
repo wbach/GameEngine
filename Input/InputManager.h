@@ -1,6 +1,7 @@
 #pragma once
 #include "Input.h"
 #include <memory>
+
 class CInputManager
 {
 public:	

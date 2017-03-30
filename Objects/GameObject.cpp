@@ -1,4 +1,5 @@
 #include "GameObject.h"
+#include "../Utils/Types.h"
 
 uint CGameObject::s_ID = 0;
 

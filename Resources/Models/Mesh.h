@@ -45,20 +45,25 @@ public:
 	const glm::vec3& GetBoundingMax();
 	const glm::vec3& GetBoundingCenter();
 
-    const unsigned int& GetVao() const;
-	const unsigned int& GetVbo(VertexBufferObjects::Type type) const;
-	const unsigned int& GetVertexCount() const;
+    const uint& GetVao() const;
+	const uint& GetVbo(VertexBufferObjects::Type type) const;
+	const uint& GetVertexCount() const;
 	const SMaterial& GetMaterial() const;
-	const std::vector<unsigned int>& GetUsedAttributes() const { return m_Attributes; }
+	const std::vector<uint>& GetUsedAttributes() const { return m_Attributes; }
+
+	void SetMaterial(const SMaterial& material)
+	{
+		m_Material = material;
+	}
 
 	void ClearData();
 private:
     SMaterial	 m_Material;
-	unsigned int m_Vao;
-	unsigned int m_Vbos[VertexBufferObjects::COUNT];
-	unsigned int m_VertexCount;
+	uint m_Vao;
+	uint m_Vbos[VertexBufferObjects::COUNT];
+	uint m_VertexCount;
 	//used attributes
-	std::vector<unsigned int> m_Attributes;
+	std::vector<uint> m_Attributes;
 
     std::vector<float> m_Positions;
 	std::vector<float> m_TextCoords;

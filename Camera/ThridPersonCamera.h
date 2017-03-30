@@ -2,8 +2,6 @@
 #include "../Input/InputManager.h"
 #include "../Objects/Transform.h"
 #include "Camera.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 class CThirdPersonCamera : public CCamera
 {

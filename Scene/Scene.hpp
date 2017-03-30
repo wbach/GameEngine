@@ -8,11 +8,11 @@
 #include "../Time/DayNightCycle.h"
 #include <vector>
 #include <list>
-
+#include "../Utils/Types.h"
 //Object in scene are in grid (one grid size)
-const unsigned int OBJECT_GRID_SIZE = 500;
+const uint OBJECT_GRID_SIZE = 500;
 // const int grid count y in worlds
-const unsigned int OBJECT_GRID_COUNT = 100;
+const uint OBJECT_GRID_COUNT = 100;
 
 class CScene
 {

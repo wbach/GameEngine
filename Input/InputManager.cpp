@@ -21,7 +21,7 @@ KeyCodes::Type CInputManager::GetKeyCode(GameActions::Type action)
 
 bool CInputManager::GetKeyDown(KeyCodes::Type key)
 {
-	return false;
+	return m_Input->GetKeyDown(key);
 }
 
 bool CInputManager::GetKeyUp(KeyCodes::Type key)

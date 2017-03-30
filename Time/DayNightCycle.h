@@ -1,8 +1,6 @@
 #pragma once
-#include <GL/glew.h>
 #include "../Lights/Light.h"
 #include "GameTime.h"
-#include "../Utils/Utils.h"
 
 class CDayNightCycle : public CGameTime
 {

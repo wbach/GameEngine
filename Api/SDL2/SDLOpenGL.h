@@ -1,9 +1,8 @@
 #pragma once
 #include "../../Debug_/Log.h"
-#include "InputSDL.h"
 #include "../Api.hpp"
+#include "InputSDL.h"
 #include <SDL2/SDL.h>
-#include <GL/glew.h>
 #include <memory>
 
 class CSdlOpenGlApi : public CApi

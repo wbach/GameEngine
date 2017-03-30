@@ -1,4 +1,7 @@
 #include "ThridPersonCamera.h"
+#include "../Utils/Utils.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 CThirdPersonCamera::CThirdPersonCamera(CInputManager* input_manager, CTransform& look_at)
 : m_Offset(0.0f)

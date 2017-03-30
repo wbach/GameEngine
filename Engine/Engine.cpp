@@ -1,7 +1,12 @@
 #include "Engine.h"
+#include "../Renderers/FullRenderer.h"
+#include "../Renderers/SimpleRenderer.h"
+#include "../Renderers/GUI/GuiRenderer.h"
+#include "../Debug_/Log.h"
+#include <fstream>
 
 CEngine::CEngine()
-    : m_DisplayManager("window_name", 1000, 600, 0)
+    : m_DisplayManager("window_name", 1366, 768, 0)
     , m_Projection({1000, 600})
 {
 	m_DisplayManager.SetInput(m_InputManager.m_Input);
@@ -30,10 +35,12 @@ void CEngine::GameLoop()
 			case 1: m_ApiMessage = ApiMessages::QUIT; break;
 			}
 
-			m_Renderer->PrepareFrame(m_Scene.get());
-			m_Renderer->Render(m_Scene.get());
-			m_Renderer->EndFrame(m_Scene.get());
-					
+			for (auto& renderer : m_Renderers)
+			{
+				renderer->PrepareFrame(m_Scene.get());
+				renderer->Render(m_Scene.get());
+				renderer->EndFrame(m_Scene.get());
+			}						
 		}
 		m_DisplayManager.Update();
 		m_InputManager.CheckReleasedKeys();
@@ -155,9 +162,13 @@ void CEngine::Init()
 	//	Error("Main Renderer not set!");
 	//		exit(-1);
 	//}
-	m_Renderer = std::make_unique<FullRenderer>(&m_Projection);
-
-	m_Renderer->Init();
+	if (m_Renderers.empty())
+	{
+		Log("Renderer not set, take default renderer (FullRenderer).");
+		m_Renderers.emplace_back(new FullRenderer(&m_Projection));
+	}
+	for(auto& renderer : m_Renderers)
+		renderer->Init();
 	
 	auto circleTexture	= m_ResorceManager.GetTextureLaoder().LoadTextureImmediately("../Data/GUI/circle2.png");
 	auto bgtexture		= m_ResorceManager.GetTextureLaoder().LoadTextureImmediately("../Data/GUI/black-knight-dark-souls.png", TextureType::MATERIAL, TextureFlip::VERTICAL);

@@ -1,4 +1,5 @@
 #include "TerrainRenderer.h"
+#include "../../Utils/GLM/GLMUtils.h"
 
 CTerrainRenderer::CTerrainRenderer(SProjection * projection_matrix, std::weak_ptr<CFrameBuffer> framebuffer)
 	: m_ProjectionMatrix(projection_matrix)

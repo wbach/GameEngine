@@ -14,8 +14,8 @@ CGameObject* CScene::AddGameObject(CGameObject* object, const glm::vec3& positio
 
 std::list<CGameObject*> CScene::GetObjectInRange(const glm::vec3 & position, float range)
 {
-	int x = static_cast<unsigned int>(position.x / OBJECT_GRID_SIZE);
-	int y = static_cast<unsigned int>(position.z / OBJECT_GRID_SIZE);
+	int x = static_cast<uint>(position.x / OBJECT_GRID_SIZE);
+	int y = static_cast<uint>(position.z / OBJECT_GRID_SIZE);
 
 	return std::list<CGameObject*>();// m_ObjectInGrid[x + y*OBJECT_GRID_COUNT];
 }

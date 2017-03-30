@@ -1,9 +1,9 @@
 #pragma once
 #include "Camera.h"
-#include <stdio.h>
-#include <stdlib.h>
 #include "../Input/InputManager.h"
 #include "../Display/DisplayManager.hpp"
+#include <stdio.h>
+#include <stdlib.h>
 
 static glm::vec3 zero(0);
 

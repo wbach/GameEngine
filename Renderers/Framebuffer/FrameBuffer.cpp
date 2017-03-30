@@ -1,4 +1,6 @@
 #include "FrameBuffer.h"
+#include "../../Utils/OpenGL/OpenGLUtils.h"
+#include "../../Debug_/Log.h"
 
 void CFrameBuffer::CreateFrameBuffer()
 {
@@ -38,7 +40,7 @@ const GLuint & CFrameBuffer::GetDepthTexture()
 	return m_DepthTexture;
 }
 
-const GLuint & CFrameBuffer::GetTexture(const unsigned int & id)
+const GLuint & CFrameBuffer::GetTexture(const uint & id)
 {
 	if (id > m_Textures.size())
 		return Utils::s_GLuint_zero;

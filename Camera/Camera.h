@@ -1,6 +1,5 @@
 #pragma once
 #include "glm/glm.hpp"
-#include "../Utils/Utils.h"
 #include "Frustrum.h"
 
 class CCamera

@@ -1,4 +1,5 @@
 #include "DisplayManager.hpp"
+#include "../Debug_/Log.h"
 
 CDisplayManager::CDisplayManager(const std::string& window_name, const int& w, const int& h, bool full_screen)
 	: CDisplayManager(std::make_unique<CSdlOpenGlApi>(), window_name, w, h, full_screen)
@@ -63,7 +64,6 @@ void CDisplayManager::CalculateFPS()
 	if (time_interval > 1)
 	{
 		m_Fps = m_FrameCount / (time_interval);
-		std::cout << "FPS : " << m_Fps << "\n";
 		m_PreviousTime = m_CurrentTime;
 		m_FrameCount = 0;
 	}

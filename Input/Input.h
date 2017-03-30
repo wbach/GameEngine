@@ -1,10 +1,8 @@
 #pragma once
-#include <iostream>
 #include "glm/glm.hpp"
-#include "../Api/Api.hpp"
 #include "GameActions.h"
 #include <list>
-#include <functional>
+
 namespace KeyCodes
 {
 	enum Type
@@ -17,7 +15,6 @@ namespace KeyCodes
 		LARROW, RARROW, UARROW, DARROW
 	};
 }
-
 
 class CApi;
 class CInput 

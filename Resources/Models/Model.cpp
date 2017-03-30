@@ -1,5 +1,6 @@
 #include "Model.h"
-
+#include "../../Debug_/Log.h"
+#include "../../Utils/GLM/GLMUtils.h"
 
 CModel::CModel()
 {
@@ -36,6 +37,29 @@ CMesh * CModel::AddMesh(std::vector<float>& positions, std::vector<float>& text_
     m_Meshes.emplace_back(positions, text_coords, normals, tangents, indices, material, bones);
 	CalculateBoudnigBox();
 	return &m_Meshes.back();
+}
+
+void CModel::SetMaterial(const SMaterial & material, uint id)
+{
+	if (id == 0)
+	{
+		for (auto& mesh : m_Meshes)
+		{
+			mesh.SetMaterial(material);
+		}
+	}
+	else
+	{
+		int x = 0;
+		for (auto& mesh : m_Meshes)
+		{
+			if (x == id)
+			{
+				mesh.SetMaterial(material);
+				return;
+			}
+		}
+	}
 }
 
 glm::vec3 CModel::GetNormalizedScaleVector(float w, float h, float z) const

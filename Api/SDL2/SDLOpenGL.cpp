@@ -1,4 +1,6 @@
 #include "SDLOpenGL.h"
+#include "../Api.hpp"
+#include <GL/glew.h>
 
 CSdlOpenGlApi::~CSdlOpenGlApi()
 {
@@ -9,7 +11,7 @@ CSdlOpenGlApi::~CSdlOpenGlApi()
 void CSdlOpenGlApi::CreateOpenGLWindow(const std::string& window_name, const int& width, const int& height, bool full_screen)
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
-	unsigned int flags = SDL_WINDOW_OPENGL;
+	uint flags = SDL_WINDOW_OPENGL;
 #ifdef EDITOR
 	flags |= SDL_WINDOW_BORDERLESS;
 #endif

@@ -1,14 +1,10 @@
 #pragma once
 #include "../Display/DisplayManager.hpp"
 #include "../Input/InputManager.h"
-#include <fstream>
 #include "../Scene/Scene.hpp"
-#include "../Renderers/FullRenderer.h"
 #include "../Renderers/LodingScreenRenderer.h"
-#include "Projection.h"
 #include "../Resources/ResourceManager.h"
-#include "../Renderers/SimpleRenderer.h"
-#include "../Debug_/Log.h"
+#include "Projection.h"
 #include "Configuration.h"
 
 class CEngine
@@ -29,7 +25,7 @@ public:
 	CDisplayManager m_DisplayManager;
 	CInputManager	m_InputManager;
 	std::unique_ptr<CScene> m_Scene;
-	std::unique_ptr<CRenderer> m_Renderer;
+	std::vector<std::unique_ptr<CRenderer>> m_Renderers;
 private:	
 	std::unique_ptr<CLoadingScreenRenderer> m_LoadingScreenRenderer;	
 	
