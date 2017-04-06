@@ -31,6 +31,9 @@ public:
 		glLoadIdentity();
 		for (const auto& p : texts)
 		{
+			if (!p.second.isActive)
+				continue;
+
 			auto text = p.second;
 			GLfloat active_color[] = { text.colour.x, text.colour.y, text.colour.z, 1 };
 			glColor4fv(active_color);
