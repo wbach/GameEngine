@@ -6,7 +6,7 @@ class CEntityGeometryPassShader : public CEntityShader
 {
 public:
 	void GetAllUniformLocations() override;
-	void ConnectTextureUnits();
+	void ConnectTextureUnits() const override;
 	void BindAttributes() override;
 
 	void Init();

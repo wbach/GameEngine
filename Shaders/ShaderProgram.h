@@ -30,6 +30,7 @@ public:
 protected:
 	virtual void GetAllUniformLocations() {}
 	virtual void BindAttributes() {}
+	virtual void ConnectTextureUnits() const {}
 	void LoadValue(uint loacation, const int& value) const;
 	void LoadValue(uint loacation, const float& value) const;
 	void LoadValue(uint loacation, const glm::vec2& value) const;
@@ -40,4 +41,5 @@ protected:
 private:
 	int m_ProgramID = 0;
 	std::list<GLuint> m_ShaderObjectsList;
+	std::string name;
 };

@@ -8,7 +8,6 @@ void FontShader::Init() {
 	FinalizeShader();
 
 	Start();
-	GetAllUniformLocations();
 	glm::mat4 scaleMat = Utils::CreateTransformationMatrix(glm::vec2(0), glm::vec2(0.0005, 0.001));
 	loadTransformation(scaleMat);
 	Stop();

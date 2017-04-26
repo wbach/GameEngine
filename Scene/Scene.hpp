@@ -44,6 +44,8 @@ public:
 
 	float GetDeltaTime() { return m_DeltaTime; }
 	float GetGlobalTime() { return m_GloabalTime; }
+
+	uint m_ObjectCount;
 protected:
 	//Minimum one light on scene only (night - decrease strength)
 	CDayNightCycle		m_DayNightCycle;
@@ -58,5 +60,5 @@ protected:
 	CResourceManager m_ResourceManager;
 
 	float m_DeltaTime = 0;
-	float m_GloabalTime = 0.f;
+	float m_GloabalTime = 0.f;	
 };

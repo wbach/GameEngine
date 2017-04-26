@@ -25,6 +25,8 @@ bool CShaderProgram::CreateProgram()
 
 bool CShaderProgram::AddShader(const std::string& filename, GLenum mode)
 {
+	name = filename;
+
 	std::string source = Utils::ReadFile(filename);
 
 	uint id;
@@ -76,9 +78,14 @@ bool CShaderProgram::FinalizeShader()
 	if (Success == 0)
 	{
 		glGetProgramInfoLog(m_ProgramID, sizeof(ErrorLog), NULL, ErrorLog);
-		Error("[Error] Error linking shader program: " + std::string(ErrorLog));
+		Error("[Error] Error linking shader program: " + name + " : " + std::string(ErrorLog));
 		return false;
 	}
+
+	glUseProgram(m_ProgramID);
+
+	GetAllUniformLocations();
+	ConnectTextureUnits();
 
 	glValidateProgram(m_ProgramID);
 	glGetProgramiv(m_ProgramID, GL_VALIDATE_STATUS, &Success);
@@ -86,7 +93,7 @@ bool CShaderProgram::FinalizeShader()
 	if (!Success)
 	{
 		glGetProgramInfoLog(m_ProgramID, sizeof(ErrorLog), NULL, ErrorLog);
-		Error("[Error] Invalid shader program : " + std::string(ErrorLog));
+		Error("[Error] Invalid shader program : " + name + " : " + std::string(ErrorLog));
 		return false;
 	}
 
@@ -97,9 +104,12 @@ bool CShaderProgram::FinalizeShader()
 
 	if (glGetError() != GL_NO_ERROR)
 	{
-		Error("[Error] Invalid shader program.");
+		Error("[Error] Invalid shader program. " + name );
 		return false;
 	}
+
+	glUseProgram(0);
+
 	return true;
 }
 

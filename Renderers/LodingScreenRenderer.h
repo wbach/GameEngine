@@ -1,7 +1,7 @@
 #pragma once
 #include "Renderer.h"
 #include "../Shaders/Loading/LoadingShader.h"
-
+#include "GUI/GuiRenderer.h"
 
 class CLoadingScreenRenderer : public CRenderer
 {

@@ -6,11 +6,6 @@ void CLoadingShader::Init()
 	AddShader("../Shaders/Game/loadingShader.vert", GL_VERTEX_SHADER);
 	AddShader("../Shaders/Game/loadingShader.frag", GL_FRAGMENT_SHADER);
 	FinalizeShader();
-
-	Start();
-	GetAllUniformLocations();
-	ConnectTextureUnits();
-	Stop();
 }
 void CLoadingShader::GetAllUniformLocations() 
 {

@@ -34,7 +34,7 @@ void FullRenderer::PrepareFrame(CScene* scene)
     {
         renderer->PrepareFrame(scene);
     }	
-   // glPolygonMode(GL_FRONT, GL_LINE);
+    //glPolygonMode(GL_FRONT, GL_LINE);
     //glPolygonMode(GL_BACK, GL_LINE);
 }
 void FullRenderer::Render(CScene* scene)

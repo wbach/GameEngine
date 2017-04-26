@@ -49,6 +49,11 @@ void CEngine::GameLoop()
 
 void CEngine::OpenGLLoadingPass(std::thread& loading_thread)
 {
+	auto object_count = m_Scene->m_ObjectCount;
+	auto object_loaded = 0;
+
+	if (object_count <= 0)
+		object_count = 1;
 
 	int x = 0;
 	bool  load = true;
@@ -65,6 +70,9 @@ void CEngine::OpenGLLoadingPass(std::thread& loading_thread)
 		{
 			load = true;
 			obj->OpenGLLoadingPass();
+			object_loaded++;
+
+			std::cout << "Loading... " + std::to_string((int)((float)object_loaded / (float)object_count) *100.f) + "%" << std::endl;
 		}
 
 		m_LoadingScreenRenderer->Render(nullptr);
@@ -80,6 +88,7 @@ void CEngine::OpenGLLoadingPass(std::thread& loading_thread)
 		{
 			load = true;
 			obj->OpenGLPostLoadingPass();
+			object_loaded++;
 		}
 		else
 		{

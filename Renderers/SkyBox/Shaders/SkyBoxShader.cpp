@@ -7,10 +7,6 @@ void CSkyBoxShader::Init()
     AddShader("../Shaders/SkyBox/SkyboxFragmentShader.frag", GL_FRAGMENT_SHADER);
     FinalizeShader();
 
-    Start();
-    GetAllUniformLocations();
-    ConnectTextureUnits();
-    Stop();
     m_Rotation = 0.f;
     m_RotationSpeed = 0.1f;
 }

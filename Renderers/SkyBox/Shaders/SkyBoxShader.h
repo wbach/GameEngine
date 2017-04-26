@@ -9,7 +9,7 @@ public:
 	void LoadViewMatrix(glm::mat4 matrix, const float& deltaTime, const float& distance_view);
 
 	void GetAllUniformLocations();
-	void ConnectTextureUnits() const;
+	void ConnectTextureUnits() const override;
 
 	void LoadFogColour(const float& r, const float& g, const float& b) const;
 	void LoadBlendFactor(const float& factor) const;

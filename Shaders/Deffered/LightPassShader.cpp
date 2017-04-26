@@ -6,19 +6,11 @@ void CLightPassShader::Init()
 	AddShader("../Shaders/Light/LightPassShader.vert", GL_VERTEX_SHADER);
 	AddShader("../Shaders/Light/LightPassShader.frag", GL_FRAGMENT_SHADER);
 	FinalizeShader();
-
-	Start();
-	GetAllUniformLocations();
-	ConnectTextureUnits();
-	Stop();
 }
 void CLightPassShader::GetAllUniformLocations()
 {
 	location_ScreenSize = GetUniformLocation("ScreenSize");
 
-	location_TransformationMatrix = GetUniformLocation("TransformationMatrix");
-	location_ProjectionMatrix = GetUniformLocation("ProjectionMatrix");
-	location_ViewMatrix = GetUniformLocation("ViewMatrix");
 	location_CameraPosition = GetUniformLocation("CameraPosition");
 
 	// Textures

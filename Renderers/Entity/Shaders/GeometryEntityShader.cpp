@@ -27,7 +27,7 @@ void CEntityGeometryPassShader::GetAllUniformLocations()
 	location_ViewDistance = GetUniformLocation("ViewDistance");
 }
 
-void CEntityGeometryPassShader::ConnectTextureUnits()
+void CEntityGeometryPassShader::ConnectTextureUnits() const
 {
 	LoadValue(location_ModelTexture, 0);
 	LoadValue(location_NormalMap, 2);
@@ -44,25 +44,11 @@ void CEntityGeometryPassShader::BindAttributes()
 }
 
 void CEntityGeometryPassShader::Init()
-{	
+{
 	CreateProgram();
 	AddShader("../Shaders/Entity/EntityGeometryPassShader.vert", GL_VERTEX_SHADER);
 	AddShader("../Shaders/Entity/EntityGeometryPassShader.frag", GL_FRAGMENT_SHADER);
 	FinalizeShader();
-	
-	Start();
-	GetAllUniformLocations();
-	ConnectTextureUnits();
-	//for (int x = 0; x < MAX_BONES; x++)
-	//{
-	//	glm::mat4 m(1.f);
-	//	LoadBoneTransform(m, x);
-	//}
-	//glm::mat4 m(1.f);
-	////m *= glm::translate(glm::vec3(0, -1, 0));
-	//m *= glm::rotate(20.f, glm::vec3(0, 1, 0));
-	//LoadBoneTransform(m, 9);
-	Stop();
 }
 
 void CEntityGeometryPassShader::LoadViewDistance(const float & distance) const

@@ -5,37 +5,44 @@
 class CTerrainShader : public CShaderProgram
 {
 public:
+	enum UniformLocation
+	{
+		TransformMatrix,
+		ProjectionMatrix,
+		ViewMatrix,
+		Viewport,
+		ScreenSize,
+		LodFactor,
+		HeightFactor,
+		ViewDistance,
+		BlendMap,
+		BackgroundTexture,
+		rTexture,
+		bTexture,
+		gTexture,
+		RockTexture,
+		BackgroundNormalTexture,
+		rNormalTexture,
+		bNormalTexture,
+		gNormalTexture,
+		RockNormalTexture,
+		DisplacementMap,
+		Count
+	};
+
+
+	CTerrainShader();
 	virtual void Init();
 	void GetAllUniformLocations();
 	void BindAttributes() override;
-	void ConnectTextureUnits();
-	void LoadTransformMatrix(const glm::mat4& matrix) const;
-	void LoadProjectionMatrix(const glm::mat4& matrix) const;
-	void LoadViewMatrix(const glm::mat4& matrix) const;
-	void LoadCameraPosition(const glm::vec3& position) const;
-	void LoadDispFactor(float factor) const;
-	void LoadViewDistance(float distance) const;
+	void ConnectTextureUnits() const override;
+
+	template<class T>
+	void Load(UniformLocation location, T value)
+	{
+		LoadValue(uniformLocations[location], value);
+	}
 protected:
-	int location_TransformationMatrix;
-	int location_ProjectionMatrix;
-	int location_ViewMatrix;
-
-	int location_CameraPosition;
-	int location_DispFactor;
-	int location_ViewDistance;
+	int uniformLocations[UniformLocation::Count];
 	
-	//Samplers2d location
-	int location_blendMap;
-	int location_backgroundTexture;
-	int location_rTexture;
-	int location_bTexture;
-	int location_gTexture;
-	int location_RockTexture;
-
-	int location_backgroundTextureNormal;
-	int location_rTextureNormal;
-	int location_bTextureNormal;
-	int location_gTextureNormal;
-	int location_RockTextureNormal;
-	int location_DisplacementMap;
 };

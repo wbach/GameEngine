@@ -20,7 +20,7 @@ public:
 	void LoadViewDistance(const float& distance) const;
 
 	void LoadScreenSize(const wb::vec2i& screen_size);
-	void ConnectTextureUnits() const;
+	void ConnectTextureUnits() const override;
 
 private:
 	int m_NumberOfLights;

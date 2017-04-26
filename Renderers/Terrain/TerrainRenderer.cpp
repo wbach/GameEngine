@@ -13,10 +13,13 @@ void CTerrainRenderer::Init()
 	m_Shader.Init();
 	m_Shader.Start();
 	assert(m_ProjectionMatrix != nullptr);
-	m_Shader.LoadViewDistance(500.f);
-	m_Shader.LoadProjectionMatrix(m_ProjectionMatrix->GetProjectionMatrix());
-	m_Shader.Stop();
-	
+
+	GLfloat viewport[4];
+	glGetFloatv(GL_VIEWPORT, viewport);
+	m_Shader.Load(CTerrainShader::UniformLocation::Viewport, glm::vec4(viewport[0], viewport[1], viewport[2], viewport[3]));
+	m_Shader.Load(CTerrainShader::UniformLocation::ViewDistance, 500.f);
+	m_Shader.Load(CTerrainShader::UniformLocation::ProjectionMatrix, m_ProjectionMatrix->GetProjectionMatrix());
+	m_Shader.Stop();	
 
 	Log("CTerrainRenderer initialized.");
 }
@@ -28,12 +31,14 @@ void CTerrainRenderer::PrepareFrame(CScene * scene)
 		sub->m_Quad.Init();
 	}
 	
-	m_Shader.Start();
-	m_Shader.LoadViewMatrix(scene->GetCamera()->GetViewMatrix());
-	m_Shader.LoadCameraPosition(scene->GetCamera()->GetPosition());
+	float heightFactor = 25.f;
 
-	m_Shader.LoadTransformMatrix(Utils::CreateTransformationMatrix(glm::vec3(100, 0, 100), glm::vec3(0, 0, 0), glm::vec3(100)));
-	m_Shader.LoadDispFactor(25);
+	m_Shader.Start();
+	m_Shader.Load(CTerrainShader::UniformLocation::ViewMatrix, scene->GetCamera()->GetViewMatrix());
+	m_Shader.Load(CTerrainShader::UniformLocation::ScreenSize, glm::vec2(1000, 600));
+	m_Shader.Load(CTerrainShader::UniformLocation::HeightFactor, heightFactor);
+	m_Shader.Load(CTerrainShader::UniformLocation::TransformMatrix, Utils::CreateTransformationMatrix(glm::vec3(100, -heightFactor / 2.f, 100), glm::vec3(0, 0, 0), glm::vec3(100)));
+	m_Shader.Load(CTerrainShader::UniformLocation::LodFactor, 4);
 	//m_Shader.LoadClipPlane(m_ClipPlane);
 	//m_Shader.LoadShadowValues(0.f, 10.f, 10.f);
 

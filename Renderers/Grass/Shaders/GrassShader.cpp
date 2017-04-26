@@ -7,11 +7,6 @@ void CGrassShader::Init()
     AddShader("../Shaders/Grass/GrassShader.frag", GL_FRAGMENT_SHADER);
     AddShader("../Shaders/Grass/GrassShader.geom", GL_GEOMETRY_SHADER);
     FinalizeShader();
-
-	Start();
-	GetAllUniformLocations();
-	ConnectTextureUnits();
-	Stop();
 }
 
 void CGrassShader::LoadTransformMatrix(const glm::mat4 & m ) const
@@ -55,7 +50,6 @@ void CGrassShader::ConnectTextureUnits() const
 
 void CGrassShader::GetAllUniformLocations()
 {
-	location_TransformationMatrix = GetUniformLocation("TransformationMatrix");
 	location_ProjectionMatrix = GetUniformLocation("ProjectionMatrix");
 	location_ViewMatrix = GetUniformLocation("ViewMatrix");
 

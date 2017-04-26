@@ -12,7 +12,7 @@ public:
 	void LoadProjectionMatrix(const glm::mat4&) const;
 	void LoadViewMatrix(const glm::mat4&) const;
 	void LoadAlphaValue(const float&) const;
-	void ConnectTextureUnits() const;
+	void ConnectTextureUnits() const override;
 
 	void GetAllUniformLocations() override;
 	void BindAttributes() override;

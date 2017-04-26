@@ -15,7 +15,7 @@ public:
 	void LoadToShadowSpaceMatrix(const glm::mat4& matrix) const;
 	void LoadShadowValues(const float& is, const float& distance, const float& shadow_map_size) const;
 
-	void ConnectTextureUnits() const;
+	void ConnectTextureUnits() const override;
 
 	void GetAllUniformLocations() override;
 	void BindAttributes() override;
